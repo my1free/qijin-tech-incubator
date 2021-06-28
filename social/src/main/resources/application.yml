@@ -5,6 +5,9 @@ server:
 spring:
   profiles:
     active: @spring.profiles.active@
+  datasource:
+    hikari:
+      connection-test-query: SELECT 1
 
 # mybatis config
 mybatis:
