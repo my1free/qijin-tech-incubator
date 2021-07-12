@@ -3,33 +3,49 @@ package tech.qijin.incubator.social.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.incubator.social.db.model.SocailCards;
-import tech.qijin.incubator.social.db.model.SocailCardsExample.Criteria;
-import tech.qijin.incubator.social.db.model.SocailCardsExample.Criterion;
-import tech.qijin.incubator.social.db.model.SocailCardsExample;
+import tech.qijin.incubator.social.db.model.SocialCard;
+import tech.qijin.incubator.social.db.model.SocialCardExample.Criteria;
+import tech.qijin.incubator.social.db.model.SocialCardExample.Criterion;
+import tech.qijin.incubator.social.db.model.SocialCardExample;
 
-public class SocailCardsSqlProvider {
+public class SocialCardSqlProvider {
 
-    public String countByExample(SocailCardsExample example) {
+    public String countByExample(SocialCardExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("socail_cards");
+        sql.SELECT("count(*)").FROM("social_card");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(SocailCardsExample example) {
+    public String deleteByExample(SocialCardExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("socail_cards");
+        sql.DELETE_FROM("social_card");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(SocailCards record) {
+    public String insertSelective(SocialCard record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("socail_cards");
+        sql.INSERT_INTO("social_card");
+        
+        if (record.getId() != null) {
+            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
+        }
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getGender() != null) {
+            sql.VALUES("gender", "#{gender,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getStatus() != null) {
+            sql.VALUES("status", "#{status,jdbcType=TINYINT}");
         }
         
         if (record.getCreateTime() != null) {
@@ -43,7 +59,7 @@ public class SocailCardsSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(SocailCardsExample example) {
+    public String selectByExample(SocialCardExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -51,9 +67,12 @@ public class SocailCardsSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
+        sql.SELECT("user_id");
+        sql.SELECT("gender");
+        sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("socail_cards");
+        sql.FROM("social_card");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -64,11 +83,11 @@ public class SocailCardsSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        SocailCards record = (SocailCards) parameter.get("record");
-        SocailCardsExample example = (SocailCardsExample) parameter.get("example");
+        SocialCard record = (SocialCard) parameter.get("record");
+        SocialCardExample example = (SocialCardExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("socail_cards");
+        sql.UPDATE("social_card");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -76,6 +95,18 @@ public class SocailCardsSqlProvider {
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getGender() != null) {
+            sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getStatus() != null) {
+            sql.SET("status = #{record.status,jdbcType=TINYINT}");
         }
         
         if (record.getCreateTime() != null) {
@@ -92,24 +123,39 @@ public class SocailCardsSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("socail_cards");
+        sql.UPDATE("social_card");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
+        sql.SET("gender = #{record.gender,jdbcType=VARCHAR}");
+        sql.SET("status = #{record.status,jdbcType=TINYINT}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
-        SocailCardsExample example = (SocailCardsExample) parameter.get("example");
+        SocialCardExample example = (SocialCardExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(SocailCards record) {
+    public String updateByPrimaryKeySelective(SocialCard record) {
         SQL sql = new SQL();
-        sql.UPDATE("socail_cards");
+        sql.UPDATE("social_card");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{userId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getGender() != null) {
+            sql.SET("gender = #{gender,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getStatus() != null) {
+            sql.SET("status = #{status,jdbcType=TINYINT}");
         }
         
         if (record.getCreateTime() != null) {
@@ -125,7 +171,7 @@ public class SocailCardsSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, SocailCardsExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, SocialCardExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

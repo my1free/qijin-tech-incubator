@@ -3,16 +3,17 @@ package tech.qijin.incubator.social.db.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import tech.qijin.incubator.social.base.LoveKind;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class SocailCardsExample {
+public class SocialLoveExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SocailCardsExample() {
+    public SocialLoveExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -233,6 +234,206 @@ public class SocailCardsExample {
 
         public Criteria andChannelNotBetween(Channel value1, Channel value2) {
             addCriterion("channel not between", value1, value2, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdEqualTo(Long value) {
+            addCriterion("user_id =", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotEqualTo(Long value) {
+            addCriterion("user_id <>", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThan(Long value) {
+            addCriterion("user_id >", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("user_id >=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThan(Long value) {
+            addCriterion("user_id <", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThanOrEqualTo(Long value) {
+            addCriterion("user_id <=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIn(List<Long> values) {
+            addCriterion("user_id in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotIn(List<Long> values) {
+            addCriterion("user_id not in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdBetween(Long value1, Long value2) {
+            addCriterion("user_id between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotBetween(Long value1, Long value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindIsNull() {
+            addCriterion("kind is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindIsNotNull() {
+            addCriterion("kind is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindEqualTo(LoveKind value) {
+            addCriterion("kind =", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindNotEqualTo(LoveKind value) {
+            addCriterion("kind <>", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindGreaterThan(LoveKind value) {
+            addCriterion("kind >", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindGreaterThanOrEqualTo(LoveKind value) {
+            addCriterion("kind >=", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindLessThan(LoveKind value) {
+            addCriterion("kind <", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindLessThanOrEqualTo(LoveKind value) {
+            addCriterion("kind <=", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindLike(LoveKind value) {
+            addCriterion("kind like", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindNotLike(LoveKind value) {
+            addCriterion("kind not like", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindIn(List<LoveKind> values) {
+            addCriterion("kind in", values, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindNotIn(List<LoveKind> values) {
+            addCriterion("kind not in", values, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindBetween(LoveKind value1, LoveKind value2) {
+            addCriterion("kind between", value1, value2, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindNotBetween(LoveKind value1, LoveKind value2) {
+            addCriterion("kind not between", value1, value2, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIsNull() {
+            addCriterion("content is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIsNotNull() {
+            addCriterion("content is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentEqualTo(String value) {
+            addCriterion("content =", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotEqualTo(String value) {
+            addCriterion("content <>", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThan(String value) {
+            addCriterion("content >", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThanOrEqualTo(String value) {
+            addCriterion("content >=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThan(String value) {
+            addCriterion("content <", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThanOrEqualTo(String value) {
+            addCriterion("content <=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotLike(String value) {
+            addCriterion("content not like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIn(List<String> values) {
+            addCriterion("content in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotIn(List<String> values) {
+            addCriterion("content not in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentBetween(String value1, String value2) {
+            addCriterion("content between", value1, value2, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotBetween(String value1, String value2) {
+            addCriterion("content not between", value1, value2, "content");
             return (Criteria) this;
         }
 

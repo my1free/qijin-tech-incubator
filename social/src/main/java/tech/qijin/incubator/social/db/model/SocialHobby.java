@@ -3,10 +3,14 @@ package tech.qijin.incubator.social.db.model;
 import java.util.Date;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class SocailCards {
+public class SocialHobby {
     private Long id;
 
     private Channel channel;
+
+    private Long userId;
+
+    private String content;
 
     private Date createTime;
 
@@ -26,6 +30,22 @@ public class SocailCards {
 
     public void setChannel(Channel channel) {
         this.channel = channel;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public Date getCreateTime() {

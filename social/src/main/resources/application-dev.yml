@@ -6,14 +6,15 @@ spring:
     active: dev
   datasource:
     druid:
-      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8
-      username: admin
-      password: Admin_@123
-      driver-class-name: com.mysql.jdbc.Driver
-      initial-size: 10
-      max-active: 30
-      min-idle: 5
-      max-wait: 60
+      social:
+        url: jdbc:mysql://127.0.0.1:3306/incubator_social?useUnicode=true&characterEncoding=utf-8
+        username: admin
+        password: Admin_@123
+        driver-class-name: com.mysql.jdbc.Driver
+        initial-size: 10
+        max-active: 30
+        min-idle: 5
+        max-wait: 60
       user:
         url: jdbc:mysql://127.0.0.1:3306/cell_user?useUnicode=true&characterEncoding=utf-8
         username: admin

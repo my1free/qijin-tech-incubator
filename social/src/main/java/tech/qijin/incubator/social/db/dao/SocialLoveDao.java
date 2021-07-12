@@ -1,8 +1,8 @@
 package tech.qijin.incubator.social.db.dao;
 
-import tech.qijin.incubator.social.db.mapper.SocailCardsMapper;
-import tech.qijin.incubator.social.db.mapper.SocailCardsSqlProvider;
-import tech.qijin.incubator.social.db.model.SocailCards;
+import tech.qijin.incubator.social.db.mapper.SocialLoveMapper;
+import tech.qijin.incubator.social.db.mapper.SocialLoveSqlProvider;
+import tech.qijin.incubator.social.db.model.SocialLove;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.InsertProvider;
 import com.google.common.collect.Lists;
@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
  * @author: SYSTEM
  **/
 
-public interface SocailCardsDao extends SocailCardsMapper {
+public interface SocialLoveDao extends SocialLoveMapper {
 
 	@InsertProvider(type = SqlProvider.class, method = "batchInsert")
-	int batchInsert(@Param("records") List<SocailCards> records);
+	int batchInsert(@Param("records") List<SocialLove> records);
 
 	class SqlProvider {
 		private static final String VALUES = "VALUES";
-		SocailCardsSqlProvider provider = new SocailCardsSqlProvider();
+		SocialLoveSqlProvider provider = new SocialLoveSqlProvider();
 
 		public String batchInsert(Map<String, Object> param) {
-			List<SocailCards> records = (List<SocailCards>) param.get("records");
+			List<SocialLove> records = (List<SocialLove>) param.get("records");
 			return genSql(records);
 		}
 
-		private String genSql(List<SocailCards> records) {
+		private String genSql(List<SocialLove> records) {
 			List<String> sqls = records.stream()
 					.map(record -> provider.insertSelective(record))
 					.collect(Collectors.toList());
