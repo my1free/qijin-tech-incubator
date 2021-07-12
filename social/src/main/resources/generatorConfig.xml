@@ -25,16 +25,16 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="tech.qijin.cell.im.db.model" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="tech.qijin.incubator.social.db.model" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="tech.qijin.cell.im.db.xml" targetProject="./src/main/java">
+        <sqlMapGenerator targetPackage="tech.qijin.incubator.social.db.xml" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="tech.qijin.cell.im.db.mapper" targetProject="./src/main/java">
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="tech.qijin.incubator.social.db.mapper" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <table tableName="%">
