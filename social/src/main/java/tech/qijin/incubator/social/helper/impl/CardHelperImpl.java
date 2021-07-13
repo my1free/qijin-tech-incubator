@@ -19,17 +19,19 @@ public class CardHelperImpl implements CardHelper {
     private SocialCardDao socialCardDao;
 
     @Override
-    public List<SocialCard> listAllCards() {
+    public List<SocialCard> listAllCards(Long userId) {
         SocialCardExample example = new SocialCardExample();
         example.createCriteria()
+                .andUserIdNotEqualTo(userId)
                 .andStatusEqualTo(CardStatus.SHOW);
         return socialCardDao.selectByExample(example);
     }
 
     @Override
-    public List<SocialCard> listCardsByGender(Gender gender) {
+    public List<SocialCard> listCardsByGender(Long userId, Gender gender) {
         SocialCardExample example = new SocialCardExample();
         example.createCriteria()
+                .andUserIdNotEqualTo(userId)
                 .andStatusEqualTo(CardStatus.SHOW)
                 .andGenderEqualTo(gender);
         return socialCardDao.selectByExample(example);

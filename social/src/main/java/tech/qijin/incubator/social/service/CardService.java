@@ -8,5 +8,5 @@ import java.util.List;
 public interface CardService {
     List<CardBo> listCard();
 
-    CardDetailBo getCardDetail();
+    CardDetailBo getCardDetail(Long userId);
 }

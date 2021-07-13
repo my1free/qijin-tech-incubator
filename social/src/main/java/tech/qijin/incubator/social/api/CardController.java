@@ -36,8 +36,8 @@ public class CardController {
     }
 
     @GetMapping("/detail")
-    public CardDetailVo cardDetail() {
-        CardDetailBo cardDetailBo = cardService.getCardDetail();
+    public CardDetailVo cardDetail(Long userId) {
+        CardDetailBo cardDetailBo = cardService.getCardDetail(userId);
         return CardDetailVo.from(cardDetailBo);
     }
 }

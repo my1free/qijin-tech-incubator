@@ -41,7 +41,8 @@ public class CardServiceImpl implements CardService {
     public List<CardBo> listCard() {
         UserProfile userProfile = getCurrUserProfile();
 
-        List<SocialCard> socialCards = cardHelper.listCardsByGender(getQueryGender(userProfile));
+//        List<SocialCard> socialCards = cardHelper.listCardsByGender(getQueryGender(userProfile));
+        List<SocialCard> socialCards = cardHelper.listAllCards(userProfile.getUserId());
         List<Long> userIds = socialCards.stream()
                 .map(SocialCard::getUserId)
                 .collect(Collectors.toList());
@@ -57,8 +58,8 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public CardDetailBo getCardDetail() {
-        UserProfile profile = getCurrUserProfile();
+    public CardDetailBo getCardDetail(Long userId) {
+        UserProfile profile = getUserProfile(userId);
         List<UserImage> images = cellUserImageService.listUserImage(profile.getUserId());
         List<SocialLove> loves = loveHelper.listLove(profile.getUserId());
         List<SocialHobby> hobbies = loveHelper.listHobby(profile.getUserId());
@@ -70,11 +71,14 @@ public class CardServiceImpl implements CardService {
                 .build();
     }
 
-    private UserProfile getCurrUserProfile() {
-        Long userId = UserUtil.getUserId();
+    private UserProfile getUserProfile(Long userId) {
         UserProfile userProfile = cellUserProfileService.getProfile(userId);
         MAssert.notNull(userProfile, ResEnum.UNAUTHORIZED);
         return userProfile;
+    }
+
+    private UserProfile getCurrUserProfile() {
+        return getUserProfile(UserUtil.getUserId());
     }
 
     private Gender getQueryGender(UserProfile userProfile) {

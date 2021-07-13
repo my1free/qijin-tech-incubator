@@ -6,7 +6,7 @@ import tech.qijin.incubator.social.db.model.SocialCard;
 import java.util.List;
 
 public interface CardHelper {
-    List<SocialCard> listAllCards();
+    List<SocialCard> listAllCards(Long userId);
 
-    List<SocialCard> listCardsByGender(Gender gender);
+    List<SocialCard> listCardsByGender(Long userId, Gender gender);
 }
