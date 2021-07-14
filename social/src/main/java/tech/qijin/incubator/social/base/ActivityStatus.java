@@ -2,22 +2,22 @@ package tech.qijin.incubator.social.base;
 
 import tech.qijin.util4j.lang.constant.EnumValue;
 
-public enum CardStatus implements EnumValue<Integer> {
-    SHOW(0, "展示"),
-    NOT_SHOW(1, "不展示"),
+public enum ActivityStatus implements EnumValue<String> {
+    OPENED(0, "开启"),
+    STOPPED(1, "停止"),
     ;
 
     private Integer value;
     private String desc;
 
-    CardStatus(Integer value, String desc) {
+    ActivityStatus(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
 
     @Override
-    public Integer value() {
-        return this.value;
+    public String value() {
+        return this.name();
     }
 
     @Override

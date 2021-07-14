@@ -1,18 +1,19 @@
 package tech.qijin.incubator.social.db.model;
 
 import java.util.Date;
+import tech.qijin.incubator.social.base.ActivityParticipantStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class SocialHobby {
+public class SocialActivityParticipant {
     private Long id;
 
     private Channel channel;
 
+    private Long activityId;
+
     private Long userId;
 
-    private String content;
-
-    private Byte status;
+    private ActivityParticipantStatus stauts;
 
     private Date createTime;
 
@@ -34,6 +35,14 @@ public class SocialHobby {
         this.channel = channel;
     }
 
+    public Long getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Long activityId) {
+        this.activityId = activityId;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -42,20 +51,12 @@ public class SocialHobby {
         this.userId = userId;
     }
 
-    public String getContent() {
-        return content;
+    public ActivityParticipantStatus getStauts() {
+        return stauts;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
+    public void setStauts(ActivityParticipantStatus stauts) {
+        this.stauts = stauts;
     }
 
     public Date getCreateTime() {

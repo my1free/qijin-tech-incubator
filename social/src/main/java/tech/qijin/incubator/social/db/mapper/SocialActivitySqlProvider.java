@@ -3,30 +3,30 @@ package tech.qijin.incubator.social.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.incubator.social.db.model.SocialHobby;
-import tech.qijin.incubator.social.db.model.SocialHobbyExample.Criteria;
-import tech.qijin.incubator.social.db.model.SocialHobbyExample.Criterion;
-import tech.qijin.incubator.social.db.model.SocialHobbyExample;
+import tech.qijin.incubator.social.db.model.SocialActivity;
+import tech.qijin.incubator.social.db.model.SocialActivityExample.Criteria;
+import tech.qijin.incubator.social.db.model.SocialActivityExample.Criterion;
+import tech.qijin.incubator.social.db.model.SocialActivityExample;
 
-public class SocialHobbySqlProvider {
+public class SocialActivitySqlProvider {
 
-    public String countByExample(SocialHobbyExample example) {
+    public String countByExample(SocialActivityExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("social_hobby");
+        sql.SELECT("count(*)").FROM("social_activity");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(SocialHobbyExample example) {
+    public String deleteByExample(SocialActivityExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("social_hobby");
+        sql.DELETE_FROM("social_activity");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(SocialHobby record) {
+    public String insertSelective(SocialActivity record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("social_hobby");
+        sql.INSERT_INTO("social_activity");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
@@ -36,16 +36,16 @@ public class SocialHobbySqlProvider {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserId() != null) {
-            sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
+        if (record.getTitle() != null) {
+            sql.VALUES("title", "#{title,jdbcType=VARCHAR}");
         }
         
-        if (record.getContent() != null) {
-            sql.VALUES("content", "#{content,jdbcType=VARCHAR}");
+        if (record.getSponsor() != null) {
+            sql.VALUES("sponsor", "#{sponsor,jdbcType=BIGINT}");
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=TINYINT}");
+            sql.VALUES("status", "#{status,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -56,10 +56,38 @@ public class SocialHobbySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getStartTime() != null) {
+            sql.VALUES("start_time", "#{startTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getEndTime() != null) {
+            sql.VALUES("end_time", "#{endTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getTags() != null) {
+            sql.VALUES("tags", "#{tags,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLocation() != null) {
+            sql.VALUES("location", "#{location,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLng() != null) {
+            sql.VALUES("lng", "#{lng,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLat() != null) {
+            sql.VALUES("lat", "#{lat,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getDescription() != null) {
+            sql.VALUES("description", "#{description,jdbcType=LONGVARCHAR}");
+        }
+        
         return sql.toString();
     }
 
-    public String selectByExample(SocialHobbyExample example) {
+    public String selectByExampleWithBLOBs(SocialActivityExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -67,12 +95,48 @@ public class SocialHobbySqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
-        sql.SELECT("user_id");
-        sql.SELECT("content");
+        sql.SELECT("title");
+        sql.SELECT("sponsor");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("social_hobby");
+        sql.SELECT("start_time");
+        sql.SELECT("end_time");
+        sql.SELECT("tags");
+        sql.SELECT("location");
+        sql.SELECT("lng");
+        sql.SELECT("lat");
+        sql.SELECT("description");
+        sql.FROM("social_activity");
+        applyWhere(sql, example, false);
+        
+        if (example != null && example.getOrderByClause() != null) {
+            sql.ORDER_BY(example.getOrderByClause());
+        }
+        
+        return sql.toString();
+    }
+
+    public String selectByExample(SocialActivityExample example) {
+        SQL sql = new SQL();
+        if (example != null && example.isDistinct()) {
+            sql.SELECT_DISTINCT("id");
+        } else {
+            sql.SELECT("id");
+        }
+        sql.SELECT("channel");
+        sql.SELECT("title");
+        sql.SELECT("sponsor");
+        sql.SELECT("status");
+        sql.SELECT("create_time");
+        sql.SELECT("update_time");
+        sql.SELECT("start_time");
+        sql.SELECT("end_time");
+        sql.SELECT("tags");
+        sql.SELECT("location");
+        sql.SELECT("lng");
+        sql.SELECT("lat");
+        sql.FROM("social_activity");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -83,11 +147,11 @@ public class SocialHobbySqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        SocialHobby record = (SocialHobby) parameter.get("record");
-        SocialHobbyExample example = (SocialHobbyExample) parameter.get("example");
+        SocialActivity record = (SocialActivity) parameter.get("record");
+        SocialActivityExample example = (SocialActivityExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("social_hobby");
+        sql.UPDATE("social_activity");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -97,16 +161,16 @@ public class SocialHobbySqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserId() != null) {
-            sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
+        if (record.getTitle() != null) {
+            sql.SET("title = #{record.title,jdbcType=VARCHAR}");
         }
         
-        if (record.getContent() != null) {
-            sql.SET("content = #{record.content,jdbcType=VARCHAR}");
+        if (record.getSponsor() != null) {
+            sql.SET("sponsor = #{record.sponsor,jdbcType=BIGINT}");
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=TINYINT}");
+            sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -117,45 +181,103 @@ public class SocialHobbySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getStartTime() != null) {
+            sql.SET("start_time = #{record.startTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getEndTime() != null) {
+            sql.SET("end_time = #{record.endTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getTags() != null) {
+            sql.SET("tags = #{record.tags,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLocation() != null) {
+            sql.SET("location = #{record.location,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLng() != null) {
+            sql.SET("lng = #{record.lng,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLat() != null) {
+            sql.SET("lat = #{record.lat,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getDescription() != null) {
+            sql.SET("description = #{record.description,jdbcType=LONGVARCHAR}");
+        }
+        
+        applyWhere(sql, example, true);
+        return sql.toString();
+    }
+
+    public String updateByExampleWithBLOBs(Map<String, Object> parameter) {
+        SQL sql = new SQL();
+        sql.UPDATE("social_activity");
+        
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        sql.SET("title = #{record.title,jdbcType=VARCHAR}");
+        sql.SET("sponsor = #{record.sponsor,jdbcType=BIGINT}");
+        sql.SET("status = #{record.status,jdbcType=VARCHAR}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("start_time = #{record.startTime,jdbcType=TIMESTAMP}");
+        sql.SET("end_time = #{record.endTime,jdbcType=TIMESTAMP}");
+        sql.SET("tags = #{record.tags,jdbcType=VARCHAR}");
+        sql.SET("location = #{record.location,jdbcType=VARCHAR}");
+        sql.SET("lng = #{record.lng,jdbcType=VARCHAR}");
+        sql.SET("lat = #{record.lat,jdbcType=VARCHAR}");
+        sql.SET("description = #{record.description,jdbcType=LONGVARCHAR}");
+        
+        SocialActivityExample example = (SocialActivityExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("social_hobby");
+        sql.UPDATE("social_activity");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
-        sql.SET("content = #{record.content,jdbcType=VARCHAR}");
-        sql.SET("status = #{record.status,jdbcType=TINYINT}");
+        sql.SET("title = #{record.title,jdbcType=VARCHAR}");
+        sql.SET("sponsor = #{record.sponsor,jdbcType=BIGINT}");
+        sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("start_time = #{record.startTime,jdbcType=TIMESTAMP}");
+        sql.SET("end_time = #{record.endTime,jdbcType=TIMESTAMP}");
+        sql.SET("tags = #{record.tags,jdbcType=VARCHAR}");
+        sql.SET("location = #{record.location,jdbcType=VARCHAR}");
+        sql.SET("lng = #{record.lng,jdbcType=VARCHAR}");
+        sql.SET("lat = #{record.lat,jdbcType=VARCHAR}");
         
-        SocialHobbyExample example = (SocialHobbyExample) parameter.get("example");
+        SocialActivityExample example = (SocialActivityExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(SocialHobby record) {
+    public String updateByPrimaryKeySelective(SocialActivity record) {
         SQL sql = new SQL();
-        sql.UPDATE("social_hobby");
+        sql.UPDATE("social_activity");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserId() != null) {
-            sql.SET("user_id = #{userId,jdbcType=BIGINT}");
+        if (record.getTitle() != null) {
+            sql.SET("title = #{title,jdbcType=VARCHAR}");
         }
         
-        if (record.getContent() != null) {
-            sql.SET("content = #{content,jdbcType=VARCHAR}");
+        if (record.getSponsor() != null) {
+            sql.SET("sponsor = #{sponsor,jdbcType=BIGINT}");
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{status,jdbcType=TINYINT}");
+            sql.SET("status = #{status,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -166,12 +288,40 @@ public class SocialHobbySqlProvider {
             sql.SET("update_time = #{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getStartTime() != null) {
+            sql.SET("start_time = #{startTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getEndTime() != null) {
+            sql.SET("end_time = #{endTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getTags() != null) {
+            sql.SET("tags = #{tags,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLocation() != null) {
+            sql.SET("location = #{location,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLng() != null) {
+            sql.SET("lng = #{lng,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getLat() != null) {
+            sql.SET("lat = #{lat,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getDescription() != null) {
+            sql.SET("description = #{description,jdbcType=LONGVARCHAR}");
+        }
+        
         sql.WHERE("id = #{id,jdbcType=BIGINT}");
         
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, SocialHobbyExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, SocialActivityExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

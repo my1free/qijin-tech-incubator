@@ -3,16 +3,17 @@ package tech.qijin.incubator.social.db.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import tech.qijin.incubator.social.base.ActivityParticipantStatus;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class SocialHobbyExample {
+public class SocialActivityParticipantExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SocialHobbyExample() {
+    public SocialActivityParticipantExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -236,6 +237,66 @@ public class SocialHobbyExample {
             return (Criteria) this;
         }
 
+        public Criteria andActivityIdIsNull() {
+            addCriterion("activity_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdIsNotNull() {
+            addCriterion("activity_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdEqualTo(Long value) {
+            addCriterion("activity_id =", value, "activityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdNotEqualTo(Long value) {
+            addCriterion("activity_id <>", value, "activityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdGreaterThan(Long value) {
+            addCriterion("activity_id >", value, "activityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("activity_id >=", value, "activityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdLessThan(Long value) {
+            addCriterion("activity_id <", value, "activityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdLessThanOrEqualTo(Long value) {
+            addCriterion("activity_id <=", value, "activityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdIn(List<Long> values) {
+            addCriterion("activity_id in", values, "activityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdNotIn(List<Long> values) {
+            addCriterion("activity_id not in", values, "activityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdBetween(Long value1, Long value2) {
+            addCriterion("activity_id between", value1, value2, "activityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityIdNotBetween(Long value1, Long value2) {
+            addCriterion("activity_id not between", value1, value2, "activityId");
+            return (Criteria) this;
+        }
+
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -296,133 +357,73 @@ public class SocialHobbyExample {
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNull() {
-            addCriterion("content is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentIsNotNull() {
-            addCriterion("content is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentEqualTo(String value) {
-            addCriterion("content =", value, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentNotEqualTo(String value) {
-            addCriterion("content <>", value, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentGreaterThan(String value) {
-            addCriterion("content >", value, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentGreaterThanOrEqualTo(String value) {
-            addCriterion("content >=", value, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentLessThan(String value) {
-            addCriterion("content <", value, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentLessThanOrEqualTo(String value) {
-            addCriterion("content <=", value, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentLike(String value) {
-            addCriterion("content like", value, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentNotLike(String value) {
-            addCriterion("content not like", value, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentIn(List<String> values) {
-            addCriterion("content in", values, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentNotIn(List<String> values) {
-            addCriterion("content not in", values, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentBetween(String value1, String value2) {
-            addCriterion("content between", value1, value2, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentNotBetween(String value1, String value2) {
-            addCriterion("content not between", value1, value2, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNull() {
+        public Criteria andStautsIsNull() {
             addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNotNull() {
+        public Criteria andStautsIsNotNull() {
             addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Byte value) {
-            addCriterion("status =", value, "status");
+        public Criteria andStautsEqualTo(ActivityParticipantStatus value) {
+            addCriterion("status =", value, "stauts");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Byte value) {
-            addCriterion("status <>", value, "status");
+        public Criteria andStautsNotEqualTo(ActivityParticipantStatus value) {
+            addCriterion("status <>", value, "stauts");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Byte value) {
-            addCriterion("status >", value, "status");
+        public Criteria andStautsGreaterThan(ActivityParticipantStatus value) {
+            addCriterion("status >", value, "stauts");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
-            addCriterion("status >=", value, "status");
+        public Criteria andStautsGreaterThanOrEqualTo(ActivityParticipantStatus value) {
+            addCriterion("status >=", value, "stauts");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Byte value) {
-            addCriterion("status <", value, "status");
+        public Criteria andStautsLessThan(ActivityParticipantStatus value) {
+            addCriterion("status <", value, "stauts");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Byte value) {
-            addCriterion("status <=", value, "status");
+        public Criteria andStautsLessThanOrEqualTo(ActivityParticipantStatus value) {
+            addCriterion("status <=", value, "stauts");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Byte> values) {
-            addCriterion("status in", values, "status");
+        public Criteria andStautsLike(ActivityParticipantStatus value) {
+            addCriterion("status like", value, "stauts");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Byte> values) {
-            addCriterion("status not in", values, "status");
+        public Criteria andStautsNotLike(ActivityParticipantStatus value) {
+            addCriterion("status not like", value, "stauts");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Byte value1, Byte value2) {
-            addCriterion("status between", value1, value2, "status");
+        public Criteria andStautsIn(List<ActivityParticipantStatus> values) {
+            addCriterion("status in", values, "stauts");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
-            addCriterion("status not between", value1, value2, "status");
+        public Criteria andStautsNotIn(List<ActivityParticipantStatus> values) {
+            addCriterion("status not in", values, "stauts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStautsBetween(ActivityParticipantStatus value1, ActivityParticipantStatus value2) {
+            addCriterion("status between", value1, value2, "stauts");
+            return (Criteria) this;
+        }
+
+        public Criteria andStautsNotBetween(ActivityParticipantStatus value1, ActivityParticipantStatus value2) {
+            addCriterion("status not between", value1, value2, "stauts");
             return (Criteria) this;
         }
 

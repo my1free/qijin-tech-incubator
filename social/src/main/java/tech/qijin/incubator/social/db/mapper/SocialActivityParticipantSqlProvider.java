@@ -3,30 +3,30 @@ package tech.qijin.incubator.social.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.incubator.social.db.model.SocialHobby;
-import tech.qijin.incubator.social.db.model.SocialHobbyExample.Criteria;
-import tech.qijin.incubator.social.db.model.SocialHobbyExample.Criterion;
-import tech.qijin.incubator.social.db.model.SocialHobbyExample;
+import tech.qijin.incubator.social.db.model.SocialActivityParticipant;
+import tech.qijin.incubator.social.db.model.SocialActivityParticipantExample.Criteria;
+import tech.qijin.incubator.social.db.model.SocialActivityParticipantExample.Criterion;
+import tech.qijin.incubator.social.db.model.SocialActivityParticipantExample;
 
-public class SocialHobbySqlProvider {
+public class SocialActivityParticipantSqlProvider {
 
-    public String countByExample(SocialHobbyExample example) {
+    public String countByExample(SocialActivityParticipantExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("social_hobby");
+        sql.SELECT("count(*)").FROM("social_activity_participant");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(SocialHobbyExample example) {
+    public String deleteByExample(SocialActivityParticipantExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("social_hobby");
+        sql.DELETE_FROM("social_activity_participant");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(SocialHobby record) {
+    public String insertSelective(SocialActivityParticipant record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("social_hobby");
+        sql.INSERT_INTO("social_activity_participant");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
@@ -36,16 +36,16 @@ public class SocialHobbySqlProvider {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
+        if (record.getActivityId() != null) {
+            sql.VALUES("activity_id", "#{activityId,jdbcType=BIGINT}");
+        }
+        
         if (record.getUserId() != null) {
             sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getContent() != null) {
-            sql.VALUES("content", "#{content,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=TINYINT}");
+        if (record.getStauts() != null) {
+            sql.VALUES("status", "#{stauts,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -59,7 +59,7 @@ public class SocialHobbySqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(SocialHobbyExample example) {
+    public String selectByExample(SocialActivityParticipantExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -67,12 +67,12 @@ public class SocialHobbySqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
+        sql.SELECT("activity_id");
         sql.SELECT("user_id");
-        sql.SELECT("content");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("social_hobby");
+        sql.FROM("social_activity_participant");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -83,11 +83,11 @@ public class SocialHobbySqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        SocialHobby record = (SocialHobby) parameter.get("record");
-        SocialHobbyExample example = (SocialHobbyExample) parameter.get("example");
+        SocialActivityParticipant record = (SocialActivityParticipant) parameter.get("record");
+        SocialActivityParticipantExample example = (SocialActivityParticipantExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("social_hobby");
+        sql.UPDATE("social_activity_participant");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -97,16 +97,16 @@ public class SocialHobbySqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
+        if (record.getActivityId() != null) {
+            sql.SET("activity_id = #{record.activityId,jdbcType=BIGINT}");
+        }
+        
         if (record.getUserId() != null) {
             sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         }
         
-        if (record.getContent() != null) {
-            sql.SET("content = #{record.content,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=TINYINT}");
+        if (record.getStauts() != null) {
+            sql.SET("status = #{record.stauts,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -123,39 +123,39 @@ public class SocialHobbySqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("social_hobby");
+        sql.UPDATE("social_activity_participant");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        sql.SET("activity_id = #{record.activityId,jdbcType=BIGINT}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
-        sql.SET("content = #{record.content,jdbcType=VARCHAR}");
-        sql.SET("status = #{record.status,jdbcType=TINYINT}");
+        sql.SET("status = #{record.stauts,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
-        SocialHobbyExample example = (SocialHobbyExample) parameter.get("example");
+        SocialActivityParticipantExample example = (SocialActivityParticipantExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(SocialHobby record) {
+    public String updateByPrimaryKeySelective(SocialActivityParticipant record) {
         SQL sql = new SQL();
-        sql.UPDATE("social_hobby");
+        sql.UPDATE("social_activity_participant");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getActivityId() != null) {
+            sql.SET("activity_id = #{activityId,jdbcType=BIGINT}");
         }
         
         if (record.getUserId() != null) {
             sql.SET("user_id = #{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getContent() != null) {
-            sql.SET("content = #{content,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.SET("status = #{status,jdbcType=TINYINT}");
+        if (record.getStauts() != null) {
+            sql.SET("status = #{stauts,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -171,7 +171,7 @@ public class SocialHobbySqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, SocialHobbyExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, SocialActivityParticipantExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

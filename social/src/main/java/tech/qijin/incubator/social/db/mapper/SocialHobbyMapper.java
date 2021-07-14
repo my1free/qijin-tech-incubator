@@ -32,10 +32,12 @@ public interface SocialHobbyMapper {
     @Insert({
         "insert into social_hobby (id, channel, ",
         "user_id, content, ",
-        "create_time, update_time)",
+        "status, create_time, ",
+        "update_time)",
         "values (#{id,jdbcType=BIGINT}, #{channel,jdbcType=VARCHAR}, ",
         "#{userId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, ",
-        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
+        "#{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, ",
+        "#{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(SocialHobby record);
 
@@ -48,6 +50,7 @@ public interface SocialHobbyMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="content", property="content", jdbcType=JdbcType.VARCHAR),
+        @Result(column="status", property="status", jdbcType=JdbcType.TINYINT),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -55,7 +58,7 @@ public interface SocialHobbyMapper {
 
     @Select({
         "select",
-        "id, channel, user_id, content, create_time, update_time",
+        "id, channel, user_id, content, status, create_time, update_time",
         "from social_hobby",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -64,6 +67,7 @@ public interface SocialHobbyMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="content", property="content", jdbcType=JdbcType.VARCHAR),
+        @Result(column="status", property="status", jdbcType=JdbcType.TINYINT),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -83,6 +87,7 @@ public interface SocialHobbyMapper {
         "set channel = #{channel,jdbcType=VARCHAR},",
           "user_id = #{userId,jdbcType=BIGINT},",
           "content = #{content,jdbcType=VARCHAR},",
+          "status = #{status,jdbcType=TINYINT},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"

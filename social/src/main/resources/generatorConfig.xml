@@ -66,5 +66,23 @@
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
         </table>
+        <table tableName="social_activity">
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="status" property="status"
+                            javaType="tech.qijin.incubator.social.base.ActivityStatus"/>
+        </table>
+        <table tableName="social_activity_image">
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="status" property="status"
+                            javaType="tech.qijin.incubator.social.base.ActivityImageStatus"/>
+        </table>
+        <table tableName="social_activity_participant">
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="status" property="stauts"
+                            javaType="tech.qijin.incubator.social.base.ActivityParticipantStatus"/>
+        </table>
     </context>
 </generatorConfiguration>

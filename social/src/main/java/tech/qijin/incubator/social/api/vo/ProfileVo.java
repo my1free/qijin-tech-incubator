@@ -7,8 +7,12 @@ import tech.qijin.cell.user.db.model.UserProfile;
 import tech.qijin.util4j.utils.ConvertUtil;
 import tech.qijin.util4j.utils.DateUtil;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 public class ProfileVo {
+    private Long userId;
     // 姓名
     private String name;
     // 性别
@@ -35,5 +39,9 @@ public class ProfileVo {
         profileVo.setAge(DateUtil.getAgeByBirth(profile.getBirthday()));
         profileVo.setConstellation(DateUtil.getConstellation(profile.getBirthday()));
         return profileVo;
+    }
+
+    public static List<ProfileVo> from(List<UserProfile> profiles) {
+        return profiles.stream().map(ProfileVo::from).collect(Collectors.toList());
     }
 }
