@@ -18,7 +18,7 @@ public class CardVo {
         return CardVo.builder()
                 .userId(cardBo.getProfile().getUserId())
                 .profile(ProfileVo.from(cardBo.getProfile()))
-                .images(ImageVo.fromList(cardBo.getImages()))
+                .images(ImageVo.from(cardBo.getImages()))
                 .build();
     }
 

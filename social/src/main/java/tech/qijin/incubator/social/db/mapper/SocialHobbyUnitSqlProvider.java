@@ -3,45 +3,41 @@ package tech.qijin.incubator.social.db.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
-import tech.qijin.incubator.social.db.model.SocialHobby;
-import tech.qijin.incubator.social.db.model.SocialHobbyExample.Criteria;
-import tech.qijin.incubator.social.db.model.SocialHobbyExample.Criterion;
-import tech.qijin.incubator.social.db.model.SocialHobbyExample;
+import tech.qijin.incubator.social.db.model.SocialHobbyUnit;
+import tech.qijin.incubator.social.db.model.SocialHobbyUnitExample.Criteria;
+import tech.qijin.incubator.social.db.model.SocialHobbyUnitExample.Criterion;
+import tech.qijin.incubator.social.db.model.SocialHobbyUnitExample;
 
-public class SocialHobbySqlProvider {
+public class SocialHobbyUnitSqlProvider {
 
-    public String countByExample(SocialHobbyExample example) {
+    public String countByExample(SocialHobbyUnitExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("social_hobby");
+        sql.SELECT("count(*)").FROM("social_hobby_unit");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(SocialHobbyExample example) {
+    public String deleteByExample(SocialHobbyUnitExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("social_hobby");
+        sql.DELETE_FROM("social_hobby_unit");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(SocialHobby record) {
+    public String insertSelective(SocialHobbyUnit record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("social_hobby");
-        
-        if (record.getId() != null) {
-            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
-        }
+        sql.INSERT_INTO("social_hobby_unit");
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserId() != null) {
-            sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
-        }
-        
         if (record.getContent() != null) {
             sql.VALUES("content", "#{content,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCount() != null) {
+            sql.VALUES("count", "#{count,jdbcType=INTEGER}");
         }
         
         if (record.getValid() != null) {
@@ -59,7 +55,7 @@ public class SocialHobbySqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(SocialHobbyExample example) {
+    public String selectByExample(SocialHobbyUnitExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -67,12 +63,12 @@ public class SocialHobbySqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("channel");
-        sql.SELECT("user_id");
         sql.SELECT("content");
+        sql.SELECT("count");
         sql.SELECT("valid");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("social_hobby");
+        sql.FROM("social_hobby_unit");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -83,11 +79,11 @@ public class SocialHobbySqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        SocialHobby record = (SocialHobby) parameter.get("record");
-        SocialHobbyExample example = (SocialHobbyExample) parameter.get("example");
+        SocialHobbyUnit record = (SocialHobbyUnit) parameter.get("record");
+        SocialHobbyUnitExample example = (SocialHobbyUnitExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("social_hobby");
+        sql.UPDATE("social_hobby_unit");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -97,12 +93,12 @@ public class SocialHobbySqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserId() != null) {
-            sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
-        }
-        
         if (record.getContent() != null) {
             sql.SET("content = #{record.content,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCount() != null) {
+            sql.SET("count = #{record.count,jdbcType=INTEGER}");
         }
         
         if (record.getValid() != null) {
@@ -123,35 +119,35 @@ public class SocialHobbySqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("social_hobby");
+        sql.UPDATE("social_hobby_unit");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("content = #{record.content,jdbcType=VARCHAR}");
+        sql.SET("count = #{record.count,jdbcType=INTEGER}");
         sql.SET("valid = #{record.valid,jdbcType=TINYINT}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
-        SocialHobbyExample example = (SocialHobbyExample) parameter.get("example");
+        SocialHobbyUnitExample example = (SocialHobbyUnitExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(SocialHobby record) {
+    public String updateByPrimaryKeySelective(SocialHobbyUnit record) {
         SQL sql = new SQL();
-        sql.UPDATE("social_hobby");
+        sql.UPDATE("social_hobby_unit");
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getUserId() != null) {
-            sql.SET("user_id = #{userId,jdbcType=BIGINT}");
-        }
-        
         if (record.getContent() != null) {
             sql.SET("content = #{content,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCount() != null) {
+            sql.SET("count = #{count,jdbcType=INTEGER}");
         }
         
         if (record.getValid() != null) {
@@ -171,7 +167,7 @@ public class SocialHobbySqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, SocialHobbyExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, SocialHobbyUnitExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

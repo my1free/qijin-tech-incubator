@@ -65,6 +65,14 @@
         <table tableName="social_hobby">
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="valid" property="valid"
+                            javaType="java.lang.Boolean"/>
+        </table>
+        <table tableName="social_hobby_list">
+            <columnOverride column="channel" property="channel"
+                            javaType="tech.qijin.util4j.trace.pojo.Channel"/>
+            <columnOverride column="valid" property="valid"
+                            javaType="java.lang.Boolean"/>
         </table>
         <table tableName="social_activity">
             <columnOverride column="channel" property="channel"

@@ -21,7 +21,7 @@ public class ImageVo {
                 .build();
     }
 
-    public static List<ImageVo> fromList(List<UserImage> images) {
+    public static List<ImageVo> from(List<UserImage> images) {
         return images.stream().map(ImageVo::from).collect(Collectors.toList());
     }
 }

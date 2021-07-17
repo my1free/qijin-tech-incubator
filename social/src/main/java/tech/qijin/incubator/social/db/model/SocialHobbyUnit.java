@@ -3,14 +3,14 @@ package tech.qijin.incubator.social.db.model;
 import java.util.Date;
 import tech.qijin.util4j.trace.pojo.Channel;
 
-public class SocialHobby {
+public class SocialHobbyUnit {
     private Long id;
 
     private Channel channel;
 
-    private Long userId;
-
     private String content;
+
+    private Integer count;
 
     private Boolean valid;
 
@@ -34,20 +34,20 @@ public class SocialHobby {
         this.channel = channel;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public Boolean getValid() {

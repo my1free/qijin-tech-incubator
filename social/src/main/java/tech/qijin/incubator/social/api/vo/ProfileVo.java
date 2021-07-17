@@ -21,6 +21,8 @@ public class ProfileVo {
     private String avatar;
     // 年龄
     private Integer age;
+    // 生日
+    private String birthday;
     // 籍贯
     private String bornCity;
     // 居住城市
@@ -36,6 +38,7 @@ public class ProfileVo {
 
     public static ProfileVo from(UserProfile profile) {
         ProfileVo profileVo = ConvertUtil.convert(profile, ProfileVo.class);
+        profileVo.setBirthday(DateUtil.formatStr(profile.getBirthday(), DateUtil.DATE_FORMAT));
         profileVo.setAge(DateUtil.getAgeByBirth(profile.getBirthday()));
         profileVo.setConstellation(DateUtil.getConstellation(profile.getBirthday()));
         return profileVo;

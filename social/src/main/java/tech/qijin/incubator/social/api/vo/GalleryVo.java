@@ -8,19 +8,14 @@ import java.util.List;
 
 @Data
 @Builder
-public class MeVo {
+public class GalleryVo {
     private ProfileVo profile;
-    private LoveVo love;
     private List<ImageVo> images;
-    private List<HobbyVo> hobbies;
 
-    public static MeVo from(MeBo meBo) {
-        if (meBo == null) return null;
-        return MeVo.builder()
+    public static GalleryVo from(MeBo meBo) {
+        return GalleryVo.builder()
                 .profile(ProfileVo.from(meBo.getProfile()))
                 .images(ImageVo.from(meBo.getImages()))
-                .love(LoveVo.from(meBo.getLoves()))
-                .hobbies(HobbyVo.from(meBo.getHobbies()))
                 .build();
     }
 }

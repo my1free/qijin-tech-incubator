@@ -17,9 +17,9 @@ public class CardDetailVo {
     public static CardDetailVo from(CardDetailBo cardDetailBo) {
         return CardDetailVo.builder()
                 .profile(ProfileVo.from(cardDetailBo.getProfile()))
-                .images(ImageVo.fromList(cardDetailBo.getImages()))
+                .images(ImageVo.from(cardDetailBo.getImages()))
                 .love(LoveVo.from(cardDetailBo.getLoves()))
-                .hobbies(HobbyVo.fromList(cardDetailBo.getHobbies()))
+                .hobbies(HobbyVo.from(cardDetailBo.getHobbies()))
                 .build();
     }
 

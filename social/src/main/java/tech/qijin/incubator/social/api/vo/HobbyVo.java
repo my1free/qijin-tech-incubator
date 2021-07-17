@@ -36,7 +36,7 @@ public class HobbyVo {
                 .build();
     }
 
-    public static List<HobbyVo> fromList(List<SocialHobby> hobbies) {
+    public static List<HobbyVo> from(List<SocialHobby> hobbies) {
         return hobbies.stream().map(HobbyVo::from).collect(Collectors.toList());
     }
 }
