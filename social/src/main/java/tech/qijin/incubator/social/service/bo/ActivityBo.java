@@ -17,4 +17,7 @@ public class ActivityBo {
     private List<SocialActivityImage> activityImages;
     private List<SocialActivityParticipant> participants;
     private Map<Long, UserProfile> userProfileMap;
+
+    private boolean isSponsor;
+    private boolean isParticipant;
 }

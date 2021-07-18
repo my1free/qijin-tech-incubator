@@ -2,6 +2,7 @@ package tech.qijin.incubator.social.service.impl;
 
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,8 @@ import tech.qijin.incubator.social.db.model.SocialActivityImage;
 import tech.qijin.incubator.social.db.model.SocialActivityParticipant;
 import tech.qijin.incubator.social.helper.ActivityHelper;
 import tech.qijin.incubator.social.service.ActivityService;
-import tech.qijin.incubator.social.service.bo.ActivitiesBo;
 import tech.qijin.incubator.social.service.bo.ActivityBo;
+import tech.qijin.satellites.user.auth.UserUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,8 @@ public class ActivityServiceImpl implements ActivityService {
         return activities.stream()
                 .map(activity -> ActivityBo.builder()
                         .activity(activity)
+                        .isSponsor(UserUtil.getUserId().equals(activity.getSponsor()))
+                        .isParticipant(CollectionUtils.isNotEmpty(participantUserIds) && participantUserIds.contains(UserUtil.getUserId()))
                         .activityImages(activityImagesMap.get(activity.getId()))
                         .participants(activityParticipantsMap.get(activity.getId()))
                         .userProfileMap(cellUserProfileService.mapProfile(userIds))
@@ -72,6 +75,27 @@ public class ActivityServiceImpl implements ActivityService {
                 .activityImages(images)
                 .participants(participants)
                 .userProfileMap(cellUserProfileService.mapProfile(userIds))
+                .isSponsor(UserUtil.getUserId().equals(activity.getSponsor()))
+                .isParticipant(CollectionUtils.isNotEmpty(participantUserIds) && participantUserIds.contains(UserUtil.getUserId()))
                 .build();
+    }
+
+    @Override
+    public Long addActivity(SocialActivity socialActivity, List<SocialActivityImage> images) {
+        activityHelper.addActivity(UserUtil.getUserId(), socialActivity);
+        if (CollectionUtils.isNotEmpty(images)) {
+            images.stream().forEach(image -> activityHelper.addActivityImage(socialActivity.getId(), image));
+        }
+        return socialActivity.getId();
+    }
+
+    @Override
+    public boolean updateActivity(Long activityId, SocialActivity socialActivity, List<SocialActivityImage> images) {
+        activityHelper.delAllActivityImage(socialActivity.getId());
+        boolean res = activityHelper.updateActivity(UserUtil.getUserId(), activityId, socialActivity);
+        if (CollectionUtils.isNotEmpty(images)) {
+            images.stream().forEach(image -> activityHelper.addActivityImage(socialActivity.getId(), image));
+        }
+        return res;
     }
 }

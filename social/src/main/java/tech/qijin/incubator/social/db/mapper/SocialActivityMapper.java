@@ -31,17 +31,19 @@ public interface SocialActivityMapper {
 
     @Insert({
         "insert into social_activity (id, channel, ",
-        "title, sponsor, status, ",
-        "create_time, update_time, ",
-        "start_time, end_time, ",
-        "tags, location, ",
-        "lng, lat, description)",
+        "title, sponsor, contact, ",
+        "status, create_time, ",
+        "update_time, start_time, ",
+        "end_time, tags, ",
+        "location, lng, lat, ",
+        "description)",
         "values (#{id,jdbcType=BIGINT}, #{channel,jdbcType=VARCHAR}, ",
-        "#{title,jdbcType=VARCHAR}, #{sponsor,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, ",
-        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, ",
-        "#{tags,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, ",
-        "#{lng,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})"
+        "#{title,jdbcType=VARCHAR}, #{sponsor,jdbcType=BIGINT}, #{contact,jdbcType=VARCHAR}, ",
+        "#{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, ",
+        "#{endTime,jdbcType=TIMESTAMP}, #{tags,jdbcType=VARCHAR}, ",
+        "#{location,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, ",
+        "#{description,jdbcType=LONGVARCHAR})"
     })
     int insert(SocialActivity record);
 
@@ -54,6 +56,7 @@ public interface SocialActivityMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
         @Result(column="sponsor", property="sponsor", jdbcType=JdbcType.BIGINT),
+        @Result(column="contact", property="contact", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -73,6 +76,7 @@ public interface SocialActivityMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
         @Result(column="sponsor", property="sponsor", jdbcType=JdbcType.BIGINT),
+        @Result(column="contact", property="contact", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -87,8 +91,8 @@ public interface SocialActivityMapper {
 
     @Select({
         "select",
-        "id, channel, title, sponsor, status, create_time, update_time, start_time, end_time, ",
-        "tags, location, lng, lat, description",
+        "id, channel, title, sponsor, contact, status, create_time, update_time, start_time, ",
+        "end_time, tags, location, lng, lat, description",
         "from social_activity",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -97,6 +101,7 @@ public interface SocialActivityMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
         @Result(column="sponsor", property="sponsor", jdbcType=JdbcType.BIGINT),
+        @Result(column="contact", property="contact", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
@@ -127,6 +132,7 @@ public interface SocialActivityMapper {
         "set channel = #{channel,jdbcType=VARCHAR},",
           "title = #{title,jdbcType=VARCHAR},",
           "sponsor = #{sponsor,jdbcType=BIGINT},",
+          "contact = #{contact,jdbcType=VARCHAR},",
           "status = #{status,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
@@ -146,6 +152,7 @@ public interface SocialActivityMapper {
         "set channel = #{channel,jdbcType=VARCHAR},",
           "title = #{title,jdbcType=VARCHAR},",
           "sponsor = #{sponsor,jdbcType=BIGINT},",
+          "contact = #{contact,jdbcType=VARCHAR},",
           "status = #{status,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",

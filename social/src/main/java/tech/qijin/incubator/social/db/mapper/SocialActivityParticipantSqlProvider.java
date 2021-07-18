@@ -44,6 +44,10 @@ public class SocialActivityParticipantSqlProvider {
             sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
         }
         
+        if (record.getContact() != null) {
+            sql.VALUES("contact", "#{contact,jdbcType=VARCHAR}");
+        }
+        
         if (record.getStauts() != null) {
             sql.VALUES("status", "#{stauts,jdbcType=VARCHAR}");
         }
@@ -69,6 +73,7 @@ public class SocialActivityParticipantSqlProvider {
         sql.SELECT("channel");
         sql.SELECT("activity_id");
         sql.SELECT("user_id");
+        sql.SELECT("contact");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
@@ -105,6 +110,10 @@ public class SocialActivityParticipantSqlProvider {
             sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         }
         
+        if (record.getContact() != null) {
+            sql.SET("contact = #{record.contact,jdbcType=VARCHAR}");
+        }
+        
         if (record.getStauts() != null) {
             sql.SET("status = #{record.stauts,jdbcType=VARCHAR}");
         }
@@ -129,6 +138,7 @@ public class SocialActivityParticipantSqlProvider {
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("activity_id = #{record.activityId,jdbcType=BIGINT}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
+        sql.SET("contact = #{record.contact,jdbcType=VARCHAR}");
         sql.SET("status = #{record.stauts,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -152,6 +162,10 @@ public class SocialActivityParticipantSqlProvider {
         
         if (record.getUserId() != null) {
             sql.SET("user_id = #{userId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getContact() != null) {
+            sql.SET("contact = #{contact,jdbcType=VARCHAR}");
         }
         
         if (record.getStauts() != null) {

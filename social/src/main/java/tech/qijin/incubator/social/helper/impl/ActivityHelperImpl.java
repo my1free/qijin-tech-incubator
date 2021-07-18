@@ -3,6 +3,7 @@ package tech.qijin.incubator.social.helper.impl;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tech.qijin.incubator.social.base.ActivityImageStatus;
@@ -13,7 +14,9 @@ import tech.qijin.incubator.social.db.dao.SocialActivityImageDao;
 import tech.qijin.incubator.social.db.dao.SocialActivityParticipantDao;
 import tech.qijin.incubator.social.db.model.*;
 import tech.qijin.incubator.social.helper.ActivityHelper;
+import tech.qijin.util4j.lang.constant.ResEnum;
 import tech.qijin.util4j.utils.DateUtil;
+import tech.qijin.util4j.utils.MAssert;
 
 import java.util.Collections;
 import java.util.List;
@@ -74,8 +77,62 @@ public class ActivityHelperImpl implements ActivityHelper {
     }
 
     @Override
+    public SocialActivityImage addActivityImage(Long activityId, SocialActivityImage image) {
+        MAssert.isTrue(StringUtils.isNotBlank(image.getUrl()), ResEnum.INVALID_PARAM.code, "图片url不能为空");
+        image.setActivityId(activityId);
+        image.setStatus(ActivityImageStatus.NORMAL);
+        socialActivityImagesDao.insertSelective(image);
+        return image;
+    }
+
+    @Override
+    public boolean delActivityImage(Long activityId, Long imageId) {
+        SocialActivityImageExample example = new SocialActivityImageExample();
+        example.createCriteria()
+                .andActivityIdEqualTo(activityId)
+                .andIdEqualTo(imageId);
+        SocialActivityImage record = new SocialActivityImage();
+        record.setStatus(ActivityImageStatus.DELETED);
+        return socialActivityImagesDao.updateByExampleSelective(record, example) > 0;
+    }
+
+    @Override
+    public boolean delAllActivityImage(Long activityId) {
+        SocialActivityImageExample example = new SocialActivityImageExample();
+        example.createCriteria()
+                .andActivityIdEqualTo(activityId);
+        SocialActivityImage record = new SocialActivityImage();
+        record.setStatus(ActivityImageStatus.DELETED);
+        return socialActivityImagesDao.updateByExampleSelective(record, example) > 0;
+    }
+
+    @Override
     public List<SocialActivityParticipant> listActivityParticipants(Long activityId) {
         List<SocialActivityParticipant> participants = mapActivityParticipant(Lists.newArrayList(activityId)).get(activityId);
         return participants != null ? participants : Lists.newArrayList();
+    }
+
+    @Override
+    public SocialActivity addActivity(Long userId, SocialActivity activity) {
+        checkActivity(activity);
+        activity.setSponsor(userId);
+        // TODO set tags
+        socialActivityDao.insertSelective(activity);
+        return activity;
+    }
+
+    @Override
+    public boolean updateActivity(Long userId, Long activityId, SocialActivity activity) {
+        checkActivity(activity);
+        SocialActivityExample example = new SocialActivityExample();
+        example.createCriteria()
+                .andIdEqualTo(activityId)
+                .andSponsorEqualTo(userId);
+        return socialActivityDao.updateByExampleSelective(activity, example) > 0;
+    }
+
+    private void checkActivity(SocialActivity activity) {
+        MAssert.isTrue(StringUtils.isNotBlank(activity.getTitle()), ResEnum.INVALID_PARAM.code, "活动名称不能为空");
+        MAssert.isTrue(StringUtils.isNotBlank(activity.getDescription()), ResEnum.INVALID_PARAM.code, "活动简介不能为空");
     }
 }

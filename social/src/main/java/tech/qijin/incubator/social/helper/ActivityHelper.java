@@ -18,5 +18,15 @@ public interface ActivityHelper {
 
     List<SocialActivityImage> listActivityImage(Long activityId);
 
+    SocialActivityImage addActivityImage(Long activityId, SocialActivityImage image);
+
+    boolean delActivityImage(Long activityId, Long imageId);
+
+    boolean delAllActivityImage(Long activityId);
+
     List<SocialActivityParticipant> listActivityParticipants(Long activityId);
+
+    SocialActivity addActivity(Long userId, SocialActivity activity);
+
+    boolean updateActivity(Long userId, Long activityId, SocialActivity activity);
 }

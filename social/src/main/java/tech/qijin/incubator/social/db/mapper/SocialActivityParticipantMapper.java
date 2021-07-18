@@ -32,12 +32,12 @@ public interface SocialActivityParticipantMapper {
     @Insert({
         "insert into social_activity_participant (id, channel, ",
         "activity_id, user_id, ",
-        "status, create_time, ",
-        "update_time)",
+        "contact, status, ",
+        "create_time, update_time)",
         "values (#{id,jdbcType=BIGINT}, #{channel,jdbcType=VARCHAR}, ",
         "#{activityId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, ",
-        "#{stauts,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{updateTime,jdbcType=TIMESTAMP})"
+        "#{contact,jdbcType=VARCHAR}, #{stauts,jdbcType=VARCHAR}, ",
+        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(SocialActivityParticipant record);
 
@@ -50,6 +50,7 @@ public interface SocialActivityParticipantMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="activity_id", property="activityId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
+        @Result(column="contact", property="contact", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="stauts", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
@@ -58,7 +59,7 @@ public interface SocialActivityParticipantMapper {
 
     @Select({
         "select",
-        "id, channel, activity_id, user_id, status, create_time, update_time",
+        "id, channel, activity_id, user_id, contact, status, create_time, update_time",
         "from social_activity_participant",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -67,6 +68,7 @@ public interface SocialActivityParticipantMapper {
         @Result(column="channel", property="channel", jdbcType=JdbcType.VARCHAR),
         @Result(column="activity_id", property="activityId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
+        @Result(column="contact", property="contact", jdbcType=JdbcType.VARCHAR),
         @Result(column="status", property="stauts", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
@@ -87,6 +89,7 @@ public interface SocialActivityParticipantMapper {
         "set channel = #{channel,jdbcType=VARCHAR},",
           "activity_id = #{activityId,jdbcType=BIGINT},",
           "user_id = #{userId,jdbcType=BIGINT},",
+          "contact = #{contact,jdbcType=VARCHAR},",
           "status = #{stauts,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP}",

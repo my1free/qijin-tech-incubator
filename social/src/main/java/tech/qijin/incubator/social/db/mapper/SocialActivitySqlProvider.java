@@ -44,6 +44,10 @@ public class SocialActivitySqlProvider {
             sql.VALUES("sponsor", "#{sponsor,jdbcType=BIGINT}");
         }
         
+        if (record.getContact() != null) {
+            sql.VALUES("contact", "#{contact,jdbcType=VARCHAR}");
+        }
+        
         if (record.getStatus() != null) {
             sql.VALUES("status", "#{status,jdbcType=VARCHAR}");
         }
@@ -97,6 +101,7 @@ public class SocialActivitySqlProvider {
         sql.SELECT("channel");
         sql.SELECT("title");
         sql.SELECT("sponsor");
+        sql.SELECT("contact");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
@@ -127,6 +132,7 @@ public class SocialActivitySqlProvider {
         sql.SELECT("channel");
         sql.SELECT("title");
         sql.SELECT("sponsor");
+        sql.SELECT("contact");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
@@ -167,6 +173,10 @@ public class SocialActivitySqlProvider {
         
         if (record.getSponsor() != null) {
             sql.SET("sponsor = #{record.sponsor,jdbcType=BIGINT}");
+        }
+        
+        if (record.getContact() != null) {
+            sql.SET("contact = #{record.contact,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -221,6 +231,7 @@ public class SocialActivitySqlProvider {
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("title = #{record.title,jdbcType=VARCHAR}");
         sql.SET("sponsor = #{record.sponsor,jdbcType=BIGINT}");
+        sql.SET("contact = #{record.contact,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -245,6 +256,7 @@ public class SocialActivitySqlProvider {
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("title = #{record.title,jdbcType=VARCHAR}");
         sql.SET("sponsor = #{record.sponsor,jdbcType=BIGINT}");
+        sql.SET("contact = #{record.contact,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
@@ -274,6 +286,10 @@ public class SocialActivitySqlProvider {
         
         if (record.getSponsor() != null) {
             sql.SET("sponsor = #{sponsor,jdbcType=BIGINT}");
+        }
+        
+        if (record.getContact() != null) {
+            sql.SET("contact = #{contact,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {

@@ -1,14 +1,15 @@
 package tech.qijin.incubator.social.api.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.collections.CollectionUtils;
 import tech.qijin.incubator.social.db.model.SocialActivityParticipant;
 import tech.qijin.incubator.social.service.bo.ActivityBo;
 import tech.qijin.util4j.utils.ConvertUtil;
+import tech.qijin.util4j.utils.DateUtil;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,10 +23,12 @@ public class ActivityVo {
     private List<String> tags;
     // 发起人
     private ProfileVo sponsor;
+    // 联系方式
+    private String contact;
     // 活动开始时间
-    private Date startTime;
+    private String startTime;
     // 活动结束时间
-    private Date endTime;
+    private String endTime;
     // 活动地点
     private String location;
     private String lng;
@@ -33,18 +36,33 @@ public class ActivityVo {
     // 活动介绍
     private String description;
     // 参与者
-    private List<ProfileVo> participants;
+    private List<ParticipantVo> participants;
+    // 是否是发起人
+    @JSONField(name = "isMaster")
+    private boolean isMaster;
+    // 是否已经加入活动
+    @JSONField(name = "isParticipant")
+    private boolean isParticipant;
 
     public static ActivityVo from(ActivityBo activityBo) {
         if (activityBo == null) return null;
         ActivityVo activityVo = ConvertUtil.convert(activityBo.getActivity(), ActivityVo.class);
+        activityVo.setStartTime(DateUtil.formatStr(activityBo.getActivity().getStartTime(), DateUtil.YYYYMMDDHHMMSS));
+        activityVo.setEndTime(DateUtil.formatStr(activityBo.getActivity().getEndTime(), DateUtil.YYYYMMDDHHMMSS));
         activityVo.setTags(Arrays.asList(activityBo.getActivity().getTags().split(",")));
         activityVo.setSponsor(ProfileVo.from(activityBo.getUserProfileMap().get(activityBo.getActivity().getSponsor())));
         if (CollectionUtils.isNotEmpty(activityBo.getParticipants())) {
-            activityVo.setParticipants(ProfileVo.from(activityBo.getParticipants().stream()
-                    .map(participant -> activityBo.getUserProfileMap().get(participant.getUserId()))
-                    .collect(Collectors.toList())));
+            activityVo.setParticipants(activityBo.getParticipants()
+                    .stream()
+                    .map(participant -> ParticipantVo.builder()
+                            .id(participant.getId())
+                            .profile(ProfileVo.from(activityBo.getUserProfileMap().get(participant.getUserId())))
+                            .contact(participant.getContact())
+                            .build())
+                    .collect(Collectors.toList()));
         }
+        activityVo.setParticipant(activityBo.isParticipant());
+        activityVo.setMaster(activityBo.isSponsor());
         return activityVo;
     }
 

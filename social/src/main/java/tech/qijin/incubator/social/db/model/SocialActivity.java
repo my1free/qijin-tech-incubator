@@ -13,6 +13,8 @@ public class SocialActivity {
 
     private Long sponsor;
 
+    private String contact;
+
     private ActivityStatus status;
 
     private Date createTime;
@@ -63,6 +65,14 @@ public class SocialActivity {
 
     public void setSponsor(Long sponsor) {
         this.sponsor = sponsor;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact == null ? null : contact.trim();
     }
 
     public ActivityStatus getStatus() {

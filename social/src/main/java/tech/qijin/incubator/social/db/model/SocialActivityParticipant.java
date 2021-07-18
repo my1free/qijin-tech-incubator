@@ -13,6 +13,8 @@ public class SocialActivityParticipant {
 
     private Long userId;
 
+    private String contact;
+
     private ActivityParticipantStatus stauts;
 
     private Date createTime;
@@ -49,6 +51,14 @@ public class SocialActivityParticipant {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact == null ? null : contact.trim();
     }
 
     public ActivityParticipantStatus getStauts() {
