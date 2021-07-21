@@ -28,10 +28,6 @@ public class SocialActivityImageSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("social_activity_image");
         
-        if (record.getId() != null) {
-            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
-        }
-        
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }

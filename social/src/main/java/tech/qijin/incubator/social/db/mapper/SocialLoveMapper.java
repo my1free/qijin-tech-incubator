@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -30,16 +31,18 @@ public interface SocialLoveMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into social_love (id, channel, ",
-        "user_id, kind, content, ",
-        "create_time, update_time)",
-        "values (#{id,jdbcType=BIGINT}, #{channel,jdbcType=VARCHAR}, ",
-        "#{userId,jdbcType=BIGINT}, #{kind,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, ",
-        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
+        "insert into social_love (channel, user_id, ",
+        "kind, content, create_time, ",
+        "update_time)",
+        "values (#{channel,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, ",
+        "#{kind,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
+        "#{updateTime,jdbcType=TIMESTAMP})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(SocialLove record);
 
     @InsertProvider(type=SocialLoveSqlProvider.class, method="insertSelective")
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insertSelective(SocialLove record);
 
     @SelectProvider(type=SocialLoveSqlProvider.class, method="selectByExample")

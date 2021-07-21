@@ -14,5 +14,5 @@ public class ActivityReqVo {
     private Date endTime;
     private String location;
     private String description;
-    private List<ImageVo> images;
+    private List<ImageReqVo> images;
 }

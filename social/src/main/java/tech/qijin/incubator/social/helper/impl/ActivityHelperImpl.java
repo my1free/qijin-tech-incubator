@@ -116,6 +116,7 @@ public class ActivityHelperImpl implements ActivityHelper {
     public SocialActivity addActivity(Long userId, SocialActivity activity) {
         checkActivity(activity);
         activity.setSponsor(userId);
+        activity.setStatus(ActivityStatus.OPENED);
         // TODO set tags
         socialActivityDao.insertSelective(activity);
         return activity;

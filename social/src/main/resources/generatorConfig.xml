@@ -48,6 +48,7 @@
         </table>
 
         <table tableName="social_card">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="status" property="status"
                             javaType="tech.qijin.incubator.social.base.CardStatus"/>
             <columnOverride column="gender" property="gender"
@@ -57,36 +58,42 @@
         </table>
 
         <table tableName="social_love">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="kind" property="kind"
                             javaType="tech.qijin.incubator.social.base.LoveKind"/>
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
         </table>
         <table tableName="social_hobby">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
             <columnOverride column="valid" property="valid"
                             javaType="java.lang.Boolean"/>
         </table>
         <table tableName="social_hobby_list">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
             <columnOverride column="valid" property="valid"
                             javaType="java.lang.Boolean"/>
         </table>
         <table tableName="social_activity">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
             <columnOverride column="status" property="status"
                             javaType="tech.qijin.incubator.social.base.ActivityStatus"/>
         </table>
         <table tableName="social_activity_image">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
             <columnOverride column="status" property="status"
                             javaType="tech.qijin.incubator.social.base.ActivityImageStatus"/>
         </table>
         <table tableName="social_activity_participant">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
             <columnOverride column="channel" property="channel"
                             javaType="tech.qijin.util4j.trace.pojo.Channel"/>
             <columnOverride column="status" property="stauts"

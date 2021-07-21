@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -30,24 +31,26 @@ public interface SocialActivityMapper {
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into social_activity (id, channel, ",
-        "title, sponsor, contact, ",
+        "insert into social_activity (channel, title, ",
+        "sponsor, contact, ",
         "status, create_time, ",
         "update_time, start_time, ",
         "end_time, tags, ",
         "location, lng, lat, ",
         "description)",
-        "values (#{id,jdbcType=BIGINT}, #{channel,jdbcType=VARCHAR}, ",
-        "#{title,jdbcType=VARCHAR}, #{sponsor,jdbcType=BIGINT}, #{contact,jdbcType=VARCHAR}, ",
+        "values (#{channel,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, ",
+        "#{sponsor,jdbcType=BIGINT}, #{contact,jdbcType=VARCHAR}, ",
         "#{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{updateTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, ",
         "#{endTime,jdbcType=TIMESTAMP}, #{tags,jdbcType=VARCHAR}, ",
         "#{location,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, ",
         "#{description,jdbcType=LONGVARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(SocialActivity record);
 
     @InsertProvider(type=SocialActivitySqlProvider.class, method="insertSelective")
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insertSelective(SocialActivity record);
 
     @SelectProvider(type=SocialActivitySqlProvider.class, method="selectByExampleWithBLOBs")

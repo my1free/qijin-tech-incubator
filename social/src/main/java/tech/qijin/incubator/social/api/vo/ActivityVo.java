@@ -44,6 +44,8 @@ public class ActivityVo {
     @JSONField(name = "isParticipant")
     private boolean isParticipant;
 
+    private List<ImageVo> images;
+
     public static ActivityVo from(ActivityBo activityBo) {
         if (activityBo == null) return null;
         ActivityVo activityVo = ConvertUtil.convert(activityBo.getActivity(), ActivityVo.class);
@@ -63,6 +65,9 @@ public class ActivityVo {
         }
         activityVo.setParticipant(activityBo.isParticipant());
         activityVo.setMaster(activityBo.isSponsor());
+        if (CollectionUtils.isNotEmpty(activityBo.getActivityImages())) {
+            activityVo.setImages(ImageVo.from2(activityBo.getActivityImages()));
+        }
         return activityVo;
     }
 
