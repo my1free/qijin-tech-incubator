@@ -14,7 +14,7 @@ spring:
         initial-size: 10
         max-active: 30
         min-idle: 5
-        max-wait: 60
+        max-wait: 6000
       user:
         url: jdbc:mysql://127.0.0.1:3306/cell_user?useUnicode=true&characterEncoding=utf-8
         username: admin
@@ -23,7 +23,7 @@ spring:
         initial-size: 10
         max-active: 30
         min-idle: 5
-        max-wait: 60
+        max-wait: 6000
     freemarker:
       suffix: .ftl
       template-loader-path: classpath:/freemarker/

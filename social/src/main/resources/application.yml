@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 25321
 # profile config
 # 参考地址: https://www.baeldung.com/spring-profiles
 spring:
@@ -16,5 +16,6 @@ mybatis:
 # logging config
 logging:
   level:
-    tech.qijin.cell.im.db: DEBUG
+    tech.qijin.incubator.social.db: DEBUG
+    tech.qijin.cell.user.db: DEBUG
 

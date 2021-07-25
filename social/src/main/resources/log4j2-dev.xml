@@ -20,7 +20,7 @@
             </Filters>
             <Policies>
                 <!--                <TimeBasedTriggeringPolicy/>-->
-                <!--                &lt;!&ndash;单个文件大小&ndash;&gt;-->
+                <!--              CardServiceImpl  &lt;!&ndash;单个文件大小&ndash;&gt;-->
                 <!--                <SizeBasedTriggeringPolicy size="500MB"/>-->
             </Policies>
             <!--保存日志文件个数-->
