@@ -44,8 +44,8 @@ public class SocialActivityParticipantSqlProvider {
             sql.VALUES("contact", "#{contact,jdbcType=VARCHAR}");
         }
         
-        if (record.getStauts() != null) {
-            sql.VALUES("status", "#{stauts,jdbcType=VARCHAR}");
+        if (record.getStatus() != null) {
+            sql.VALUES("status", "#{status,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -110,8 +110,8 @@ public class SocialActivityParticipantSqlProvider {
             sql.SET("contact = #{record.contact,jdbcType=VARCHAR}");
         }
         
-        if (record.getStauts() != null) {
-            sql.SET("status = #{record.stauts,jdbcType=VARCHAR}");
+        if (record.getStatus() != null) {
+            sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -135,7 +135,7 @@ public class SocialActivityParticipantSqlProvider {
         sql.SET("activity_id = #{record.activityId,jdbcType=BIGINT}");
         sql.SET("user_id = #{record.userId,jdbcType=BIGINT}");
         sql.SET("contact = #{record.contact,jdbcType=VARCHAR}");
-        sql.SET("status = #{record.stauts,jdbcType=VARCHAR}");
+        sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
@@ -164,8 +164,8 @@ public class SocialActivityParticipantSqlProvider {
             sql.SET("contact = #{contact,jdbcType=VARCHAR}");
         }
         
-        if (record.getStauts() != null) {
-            sql.SET("status = #{stauts,jdbcType=VARCHAR}");
+        if (record.getStatus() != null) {
+            sql.SET("status = #{status,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {

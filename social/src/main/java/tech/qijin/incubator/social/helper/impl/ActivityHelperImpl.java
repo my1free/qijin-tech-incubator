@@ -54,11 +54,40 @@ public class ActivityHelperImpl implements ActivityHelper {
         SocialActivityParticipantExample example = new SocialActivityParticipantExample();
         example.createCriteria()
                 .andActivityIdIn(activityIds)
-                .andStautsEqualTo(ActivityParticipantStatus.JOIN);
+                .andStatusEqualTo(ActivityParticipantStatus.JOIN);
         return socialActivityParticipantDao.selectByExample(example).stream()
                 .collect(Collectors.groupingBy(SocialActivityParticipant::getActivityId));
     }
 
+    @Override
+    public boolean hasJoined(Long userId, Long activityId) {
+        SocialActivityParticipantExample example = new SocialActivityParticipantExample();
+        example.createCriteria().andUserIdEqualTo(userId)
+                .andActivityIdEqualTo(activityId)
+                .andStatusEqualTo(ActivityParticipantStatus.JOIN);
+        return socialActivityParticipantDao.selectByExample(example).size() > 0;
+    }
+
+    @Override
+    public boolean addActivityParticipant(Long activityId, Long userId) {
+        SocialActivityParticipant participant = new SocialActivityParticipant();
+        participant.setActivityId(activityId);
+        participant.setStatus(ActivityParticipantStatus.JOIN);
+        participant.setUserId(userId);
+        return socialActivityParticipantDao.insertSelective(participant) > 0;
+    }
+
+    @Override
+    public boolean removeActivityParticipant(Long activityId, Long userId) {
+        SocialActivityParticipantExample example = new SocialActivityParticipantExample();
+        example.createCriteria()
+                .andActivityIdEqualTo(activityId)
+                .andUserIdEqualTo(userId)
+                .andStatusEqualTo(ActivityParticipantStatus.JOIN);
+        SocialActivityParticipant record = new SocialActivityParticipant();
+        record.setStatus(ActivityParticipantStatus.QUIT);
+        return socialActivityParticipantDao.updateByExampleSelective(record, example) > 0;
+    }
     @Override
     public Map<Long, List<SocialActivityImage>> mapActivityImage(List<Long> activityIds) {
         if (CollectionUtils.isEmpty(activityIds)) return Collections.emptyMap();
@@ -130,6 +159,16 @@ public class ActivityHelperImpl implements ActivityHelper {
                 .andIdEqualTo(activityId)
                 .andSponsorEqualTo(userId);
         return socialActivityDao.updateByExampleSelective(activity, example) > 0;
+    }
+
+    @Override
+    public boolean closeActivity(Long activityId, Long userId) {
+        SocialActivityExample example = new SocialActivityExample();
+        example.createCriteria().andIdEqualTo(activityId)
+                .andSponsorEqualTo(userId);
+        SocialActivity record = new SocialActivity();
+        record.setStatus(ActivityStatus.STOPPED);
+        return socialActivityDao.updateByExampleSelective(record, example) > 0;
     }
 
     private void checkActivity(SocialActivity activity) {

@@ -15,4 +15,5 @@ public class ActivityReqVo {
     private String location;
     private String description;
     private List<ImageReqVo> images;
+    private List<String> tags;
 }

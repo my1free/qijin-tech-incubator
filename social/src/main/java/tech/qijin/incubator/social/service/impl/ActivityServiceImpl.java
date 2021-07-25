@@ -7,6 +7,7 @@ import org.apache.commons.collections.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.qijin.cell.user.service.CellUserProfileService;
+import tech.qijin.incubator.social.base.ActivityStatus;
 import tech.qijin.incubator.social.db.model.SocialActivity;
 import tech.qijin.incubator.social.db.model.SocialActivityImage;
 import tech.qijin.incubator.social.db.model.SocialActivityParticipant;
@@ -14,6 +15,9 @@ import tech.qijin.incubator.social.helper.ActivityHelper;
 import tech.qijin.incubator.social.service.ActivityService;
 import tech.qijin.incubator.social.service.bo.ActivityBo;
 import tech.qijin.satellites.user.auth.UserUtil;
+import tech.qijin.util4j.lang.constant.ResEnum;
+import tech.qijin.util4j.utils.DateUtil;
+import tech.qijin.util4j.utils.MAssert;
 
 import java.util.List;
 import java.util.Map;
@@ -91,11 +95,42 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public boolean updateActivity(Long activityId, SocialActivity socialActivity, List<SocialActivityImage> images) {
-        activityHelper.delAllActivityImage(socialActivity.getId());
+        activityHelper.delAllActivityImage(activityId);
         boolean res = activityHelper.updateActivity(UserUtil.getUserId(), activityId, socialActivity);
         if (CollectionUtils.isNotEmpty(images)) {
-            images.stream().forEach(image -> activityHelper.addActivityImage(socialActivity.getId(), image));
+            images.stream().forEach(image -> activityHelper.addActivityImage(activityId, image));
         }
         return res;
+    }
+
+    @Override
+    public boolean joinActivity(Long activityId) {
+        SocialActivity activity = getAvailableActivity(activityId);
+        if (activityHelper.hasJoined(UserUtil.getUserId(), activityId)) return true;
+        return activityHelper.addActivityParticipant(activityId, UserUtil.getUserId());
+    }
+
+    @Override
+    public boolean cancelActivity(Long activityId) {
+        SocialActivity activity = getAvailableActivity(activityId);
+        return activityHelper.removeActivityParticipant(activityId, UserUtil.getUserId());
+    }
+
+    @Override
+    public boolean closeActivity(Long activityId) {
+        SocialActivity activity = getAvailableActivity(activityId);
+        return activityHelper.closeActivity(activityId, UserUtil.getUserId());
+    }
+
+    private SocialActivity getAvailableActivity(Long activityId) {
+        SocialActivity activity = activityHelper.getActivity(activityId);
+        checkActivity(activity);
+        return activity;
+    }
+
+    private void checkActivity(SocialActivity activity) {
+        MAssert.isTrue(activity != null, ResEnum.INVALID_PARAM.code, "活动不存在");
+        MAssert.isTrue(ActivityStatus.OPENED.equals(activity.getStatus()), ResEnum.INVALID_PARAM.code, "活动已取消");
+        MAssert.isTrue(DateUtil.now().compareTo(activity.getEndTime()) <= 0, ResEnum.INVALID_PARAM.code, "活动已结束");
     }
 }

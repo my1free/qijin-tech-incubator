@@ -14,6 +14,12 @@ public interface ActivityHelper {
 
     Map<Long, List<SocialActivityParticipant>> mapActivityParticipant(List<Long> activityIds);
 
+    boolean hasJoined(Long userId, Long activityId);
+
+    boolean addActivityParticipant(Long activityId, Long userId);
+
+    boolean removeActivityParticipant(Long activityId, Long userId);
+
     Map<Long, List<SocialActivityImage>> mapActivityImage(List<Long> activityIds);
 
     List<SocialActivityImage> listActivityImage(Long activityId);
@@ -29,4 +35,7 @@ public interface ActivityHelper {
     SocialActivity addActivity(Long userId, SocialActivity activity);
 
     boolean updateActivity(Long userId, Long activityId, SocialActivity activity);
+
+    boolean closeActivity(Long activityId, Long userId);
+
 }

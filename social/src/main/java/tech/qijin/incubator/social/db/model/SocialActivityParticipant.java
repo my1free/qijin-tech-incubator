@@ -15,7 +15,7 @@ public class SocialActivityParticipant {
 
     private String contact;
 
-    private ActivityParticipantStatus stauts;
+    private ActivityParticipantStatus status;
 
     private Date createTime;
 
@@ -61,12 +61,12 @@ public class SocialActivityParticipant {
         this.contact = contact == null ? null : contact.trim();
     }
 
-    public ActivityParticipantStatus getStauts() {
-        return stauts;
+    public ActivityParticipantStatus getStatus() {
+        return status;
     }
 
-    public void setStauts(ActivityParticipantStatus stauts) {
-        this.stauts = stauts;
+    public void setStatus(ActivityParticipantStatus status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {

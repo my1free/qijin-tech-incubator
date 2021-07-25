@@ -427,73 +427,73 @@ public class SocialActivityParticipantExample {
             return (Criteria) this;
         }
 
-        public Criteria andStautsIsNull() {
+        public Criteria andStatusIsNull() {
             addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andStautsIsNotNull() {
+        public Criteria andStatusIsNotNull() {
             addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStautsEqualTo(ActivityParticipantStatus value) {
-            addCriterion("status =", value, "stauts");
+        public Criteria andStatusEqualTo(ActivityParticipantStatus value) {
+            addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsNotEqualTo(ActivityParticipantStatus value) {
-            addCriterion("status <>", value, "stauts");
+        public Criteria andStatusNotEqualTo(ActivityParticipantStatus value) {
+            addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsGreaterThan(ActivityParticipantStatus value) {
-            addCriterion("status >", value, "stauts");
+        public Criteria andStatusGreaterThan(ActivityParticipantStatus value) {
+            addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsGreaterThanOrEqualTo(ActivityParticipantStatus value) {
-            addCriterion("status >=", value, "stauts");
+        public Criteria andStatusGreaterThanOrEqualTo(ActivityParticipantStatus value) {
+            addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsLessThan(ActivityParticipantStatus value) {
-            addCriterion("status <", value, "stauts");
+        public Criteria andStatusLessThan(ActivityParticipantStatus value) {
+            addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsLessThanOrEqualTo(ActivityParticipantStatus value) {
-            addCriterion("status <=", value, "stauts");
+        public Criteria andStatusLessThanOrEqualTo(ActivityParticipantStatus value) {
+            addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsLike(ActivityParticipantStatus value) {
-            addCriterion("status like", value, "stauts");
+        public Criteria andStatusLike(ActivityParticipantStatus value) {
+            addCriterion("status like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsNotLike(ActivityParticipantStatus value) {
-            addCriterion("status not like", value, "stauts");
+        public Criteria andStatusNotLike(ActivityParticipantStatus value) {
+            addCriterion("status not like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsIn(List<ActivityParticipantStatus> values) {
-            addCriterion("status in", values, "stauts");
+        public Criteria andStatusIn(List<ActivityParticipantStatus> values) {
+            addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsNotIn(List<ActivityParticipantStatus> values) {
-            addCriterion("status not in", values, "stauts");
+        public Criteria andStatusNotIn(List<ActivityParticipantStatus> values) {
+            addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsBetween(ActivityParticipantStatus value1, ActivityParticipantStatus value2) {
-            addCriterion("status between", value1, value2, "stauts");
+        public Criteria andStatusBetween(ActivityParticipantStatus value1, ActivityParticipantStatus value2) {
+            addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStautsNotBetween(ActivityParticipantStatus value1, ActivityParticipantStatus value2) {
-            addCriterion("status not between", value1, value2, "stauts");
+        public Criteria andStatusNotBetween(ActivityParticipantStatus value1, ActivityParticipantStatus value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
 

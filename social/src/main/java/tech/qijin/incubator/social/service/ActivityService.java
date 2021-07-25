@@ -15,4 +15,25 @@ public interface ActivityService {
 
     boolean updateActivity(Long activityId, SocialActivity socialActivity, List<SocialActivityImage> images);
 
+    /**
+     * 加入活动
+     * @param activityId
+     * @return
+     */
+    boolean joinActivity(Long activityId);
+
+    /**
+     * 取消加入活动
+     * @param activityId
+     * @return
+     */
+    boolean cancelActivity(Long activityId);
+
+    /**
+     * 关闭活动
+     * @param activityId
+     * @return
+     */
+    boolean closeActivity(Long activityId);
+
 }

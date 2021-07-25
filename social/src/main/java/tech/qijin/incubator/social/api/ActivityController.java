@@ -1,12 +1,15 @@
 package tech.qijin.incubator.social.api;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.qijin.cell.user.db.model.UserProfile;
 import tech.qijin.cell.user.service.CellUserProfileService;
 import tech.qijin.incubator.social.api.vo.ActivitiesVo;
+import tech.qijin.incubator.social.api.vo.ActivityOpReqVo;
 import tech.qijin.incubator.social.api.vo.ActivityReqVo;
 import tech.qijin.incubator.social.api.vo.ActivityVo;
 import tech.qijin.incubator.social.db.model.SocialActivity;
@@ -54,12 +57,33 @@ public class ActivityController {
         }
         MAssert.isTrue(StringUtils.isNotBlank(contact), ResEnum.INVALID_PARAM.code, "联系方式不能为空");
         SocialActivity socialActivity = ConvertUtil.convert(activityReqVo, SocialActivity.class);
+        if (CollectionUtils.isNotEmpty(activityReqVo.getTags())) {
+            socialActivity.setTags(Strings.join(activityReqVo.getTags(), ','));
+        }
         List<SocialActivityImage> images = ConvertUtil.convertList(activityReqVo.getImages(), SocialActivityImage.class);
         if (NumberUtil.gtZero(activityReqVo.getActivityId())) {
             activityService.updateActivity(activityReqVo.getActivityId(), socialActivity, images);
         }else{
             activityService.addActivity(socialActivity, images);
         }
+        return ResultVo.instance().success();
+    }
+
+    @PostMapping("/join")
+    public ResultVo joinActivity(@RequestBody ActivityOpReqVo activityOpReqVo) {
+        activityService.joinActivity(activityOpReqVo.getActivityId());
+        return ResultVo.instance().success();
+    }
+
+    @PostMapping("/cancel")
+    public ResultVo leaveActivity(@RequestBody ActivityOpReqVo activityOpReqVo) {
+        activityService.cancelActivity(activityOpReqVo.getActivityId());
+        return ResultVo.instance().success();
+    }
+
+    @PostMapping("/close")
+    public ResultVo closeActivity(@RequestBody ActivityOpReqVo activityOpReqVo) {
+        activityService.closeActivity(activityOpReqVo.getActivityId());
         return ResultVo.instance().success();
     }
 }

@@ -37,7 +37,7 @@ public interface SocialActivityParticipantMapper {
         "update_time)",
         "values (#{channel,jdbcType=VARCHAR}, #{activityId,jdbcType=BIGINT}, ",
         "#{userId,jdbcType=BIGINT}, #{contact,jdbcType=VARCHAR}, ",
-        "#{stauts,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
+        "#{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
@@ -54,7 +54,7 @@ public interface SocialActivityParticipantMapper {
         @Result(column="activity_id", property="activityId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="contact", property="contact", jdbcType=JdbcType.VARCHAR),
-        @Result(column="status", property="stauts", jdbcType=JdbcType.VARCHAR),
+        @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -72,7 +72,7 @@ public interface SocialActivityParticipantMapper {
         @Result(column="activity_id", property="activityId", jdbcType=JdbcType.BIGINT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="contact", property="contact", jdbcType=JdbcType.VARCHAR),
-        @Result(column="status", property="stauts", jdbcType=JdbcType.VARCHAR),
+        @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -93,7 +93,7 @@ public interface SocialActivityParticipantMapper {
           "activity_id = #{activityId,jdbcType=BIGINT},",
           "user_id = #{userId,jdbcType=BIGINT},",
           "contact = #{contact,jdbcType=VARCHAR},",
-          "status = #{stauts,jdbcType=VARCHAR},",
+          "status = #{status,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"
