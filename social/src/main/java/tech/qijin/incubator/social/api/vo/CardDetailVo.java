@@ -13,6 +13,7 @@ public class CardDetailVo {
     private List<ImageVo> images;
     private LoveVo love;
     private List<HobbyVo> hobbies;
+    private boolean shouldShow;
 
     public static CardDetailVo from(CardDetailBo cardDetailBo) {
         return CardDetailVo.builder()

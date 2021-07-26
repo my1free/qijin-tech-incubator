@@ -17,4 +17,5 @@ public class MeBo {
     private List<UserImage> images;
     private List<SocialHobby> hobbies;
     private List<SocialLove> loves;
+    private boolean shouldShow;
 }

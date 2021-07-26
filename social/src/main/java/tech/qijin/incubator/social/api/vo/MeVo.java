@@ -13,6 +13,7 @@ public class MeVo {
     private LoveVo love;
     private List<ImageVo> images;
     private List<HobbyVo> hobbies;
+    private boolean shouldShow;
 
     public static MeVo from(MeBo meBo) {
         if (meBo == null) return null;
@@ -21,6 +22,7 @@ public class MeVo {
                 .images(ImageVo.from(meBo.getImages()))
                 .love(LoveVo.from(meBo.getLoves()))
                 .hobbies(HobbyVo.from(meBo.getHobbies()))
+                .shouldShow(meBo.isShouldShow())
                 .build();
     }
 }

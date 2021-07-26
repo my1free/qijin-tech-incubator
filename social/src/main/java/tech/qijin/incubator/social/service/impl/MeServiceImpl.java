@@ -11,6 +11,7 @@ import tech.qijin.incubator.social.base.LoveKind;
 import tech.qijin.incubator.social.db.model.SocialHobby;
 import tech.qijin.incubator.social.db.model.SocialHobbyUnit;
 import tech.qijin.incubator.social.db.model.SocialLove;
+import tech.qijin.incubator.social.helper.CardHelper;
 import tech.qijin.incubator.social.helper.LoveHelper;
 import tech.qijin.incubator.social.service.MeService;
 import tech.qijin.incubator.social.service.bo.HobbiesBo;
@@ -28,6 +29,8 @@ public class MeServiceImpl implements MeService {
     @Autowired
     private LoveHelper loveHelper;
     @Autowired
+    private CardHelper cardHelper;
+    @Autowired
     private CellUserProfileService cellUserProfileService;
     @Autowired
     private CellUserImageService cellUserImageService;
@@ -39,11 +42,13 @@ public class MeServiceImpl implements MeService {
         List<UserImage> images = cellUserImageService.listUserImage(userId);
         List<SocialLove> loves =  loveHelper.listLove(userId);
         List<SocialHobby> hobbies = loveHelper.listHobby(userId);
+        boolean shouldShow = cardHelper.shouldShow(profile, images);
         return MeBo.builder()
                 .profile(profile)
                 .images(images)
                 .loves(loves)
                 .hobbies(hobbies)
+                .shouldShow(shouldShow)
                 .build();
     }
 

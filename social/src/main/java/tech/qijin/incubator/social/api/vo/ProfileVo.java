@@ -40,7 +40,9 @@ public class ProfileVo {
 
     public static ProfileVo from(UserProfile profile) {
         ProfileVo profileVo = ConvertUtil.convert(profile, ProfileVo.class);
-        profileVo.setBirthday(DateUtil.formatStr(profile.getBirthday(), DateUtil.DATE_FORMAT));
+        if (profile.getBirthday() != null) {
+            profileVo.setBirthday(DateUtil.formatStr(profile.getBirthday(), DateUtil.DATE_FORMAT));
+        }
         profileVo.setAge(DateUtil.getAgeByBirth(profile.getBirthday()));
         profileVo.setConstellation(DateUtil.getConstellation(profile.getBirthday()));
         return profileVo;
