@@ -68,10 +68,16 @@ public class CardServiceImpl implements CardService {
         Map<Long, UserProfile> userProfileMap = cellUserProfileService.mapProfile(userIds);
         Map<Long, List<UserImage>> userImagesMap = cellUserImageService.mapUserImages(userIds);
         return userIds.stream()
-                .map(uid -> CardBo.builder()
-                        .profile(userProfileMap.get(uid))
-                        .images(userImagesMap.get(uid))
-                        .build())
+                .map(uid -> {
+                    List<UserImage> images = userImagesMap.get(uid);
+                    if (CollectionUtils.isNotEmpty(images) && images.size() > 5) {
+                        images = images.subList(0, 5);
+                    }
+                    return CardBo.builder()
+                            .profile(userProfileMap.get(uid))
+                            .images(images)
+                            .build();
+                })
                 .collect(Collectors.toList());
     }
 
@@ -111,13 +117,14 @@ public class CardServiceImpl implements CardService {
     }
 
     @Component
-    public class ProfileAndImageObserver implements Observer{
+    public class ProfileAndImageObserver implements Observer {
         @Override
         public void update(Observable o, Object arg) {
             UserProfileAndImageBo profileAndImageBo = (UserProfileAndImageBo) arg;
             UserProfile profile = profileAndImageBo.getProfile();
             List<UserImage> images = profileAndImageBo.getImages();
             boolean show = cardHelper.shouldShow(profile, images);
+            log.info("ProfileAndImageObserver userId={}, show={}", profile.getUserId(), show);
             SocialCard card = cardHelper.getCardByUserId(profile.getUserId());
             if (show) {
                 doShow(profile, card);
@@ -129,6 +136,7 @@ public class CardServiceImpl implements CardService {
         private void doShow(UserProfile profile, SocialCard card) {
             if (card == null) {
                 cardHelper.addCard(profile.getUserId(), profile.getGender());
+                return;
             }
             if (CardStatus.SHOW.equals(card.getStatus())) {
                 return;
@@ -136,7 +144,7 @@ public class CardServiceImpl implements CardService {
             cardHelper.updateCardStatus(card.getId(), CardStatus.SHOW);
         }
 
-        private void doHide(UserProfile profile,  SocialCard card) {
+        private void doHide(UserProfile profile, SocialCard card) {
             if (card == null) {
                 return;
             }

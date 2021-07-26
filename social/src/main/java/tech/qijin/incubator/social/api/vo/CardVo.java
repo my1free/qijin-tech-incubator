@@ -2,6 +2,7 @@ package tech.qijin.incubator.social.api.vo;
 
 import lombok.Builder;
 import lombok.Data;
+import tech.qijin.cell.user.db.model.UserImage;
 import tech.qijin.incubator.social.service.bo.CardBo;
 
 import java.util.List;

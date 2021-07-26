@@ -46,7 +46,7 @@ public class CardHelperImpl implements CardHelper {
     public SocialCard getCardByUserId(long userId) {
         SocialCardExample example = new SocialCardExample();
         example.createCriteria()
-                .andUserIdNotEqualTo(userId);
+                .andUserIdEqualTo(userId);
         return socialCardDao.selectByExample(example).stream().findFirst().orElse(null);
     }
 
