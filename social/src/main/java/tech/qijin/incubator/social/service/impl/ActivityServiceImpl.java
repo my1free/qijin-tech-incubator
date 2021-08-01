@@ -50,15 +50,22 @@ public class ActivityServiceImpl implements ActivityService {
                 .distinct()
                 .collect(Collectors.toList());
         List<Long> userIds = ListUtils.union(sponsorUserIds, participantUserIds);
+
         return activities.stream()
-                .map(activity -> ActivityBo.builder()
-                        .activity(activity)
-                        .isSponsor(UserUtil.getUserId().equals(activity.getSponsor()))
-                        .isParticipant(CollectionUtils.isNotEmpty(participantUserIds) && participantUserIds.contains(UserUtil.getUserId()))
-                        .activityImages(activityImagesMap.get(activity.getId()))
-                        .participants(activityParticipantsMap.get(activity.getId()))
-                        .userProfileMap(cellUserProfileService.mapProfile(userIds))
-                        .build())
+                .map(activity -> {
+                    List<SocialActivityParticipant> participants = activityParticipantsMap.get(activity.getId());
+                    if (CollectionUtils.isNotEmpty(participants) && participants.size() > 8) {
+                        participants = participants.subList(0, 8);
+                    }
+                    return ActivityBo.builder()
+                            .activity(activity)
+                            .isSponsor(UserUtil.getUserId().equals(activity.getSponsor()))
+                            .isParticipant(CollectionUtils.isNotEmpty(participantUserIds) && participantUserIds.contains(UserUtil.getUserId()))
+                            .activityImages(activityImagesMap.get(activity.getId()))
+                            .participants(participants)
+                            .userProfileMap(cellUserProfileService.mapProfile(userIds))
+                            .build();
+                })
                 .collect(Collectors.toList());
     }
 

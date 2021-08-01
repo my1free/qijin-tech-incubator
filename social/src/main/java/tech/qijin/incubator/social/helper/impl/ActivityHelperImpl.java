@@ -172,7 +172,9 @@ public class ActivityHelperImpl implements ActivityHelper {
     }
 
     private void checkActivity(SocialActivity activity) {
-        MAssert.isTrue(StringUtils.isNotBlank(activity.getTitle()), ResEnum.INVALID_PARAM.code, "活动名称不能为空");
-        MAssert.isTrue(StringUtils.isNotBlank(activity.getDescription()), ResEnum.INVALID_PARAM.code, "活动简介不能为空");
+        MAssert.isTrue(StringUtils.isNotBlank(activity.getTitle()), ResEnum.INVALID_PARAM.code, "[活动名称] 必须填写哦");
+        MAssert.isTrue(StringUtils.isNotBlank(activity.getDescription()), ResEnum.INVALID_PARAM.code, "[活动简介] 必须填写哦");
+        MAssert.isTrue(activity.getStartTime() != null, ResEnum.INVALID_PARAM.code, "[开始时间] 必须填写哦");
+        MAssert.isTrue(activity.getEndTime() != null, ResEnum.INVALID_PARAM.code, "[结束时间] 必须填写哦");
     }
 }
