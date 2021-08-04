@@ -16,7 +16,7 @@ public class ProfileVo {
     // 姓名
     private String name;
     // 身高
-    private Integer height;
+    private String height;
     // 性别
     private Gender gender;
     // 头像

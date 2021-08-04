@@ -19,6 +19,7 @@ import tech.qijin.util4j.utils.DateUtil;
 import tech.qijin.util4j.utils.MAssert;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -172,9 +173,11 @@ public class ActivityHelperImpl implements ActivityHelper {
     }
 
     private void checkActivity(SocialActivity activity) {
+        Date now = DateUtil.now();
         MAssert.isTrue(StringUtils.isNotBlank(activity.getTitle()), ResEnum.INVALID_PARAM.code, "[活动名称] 必须填写哦");
         MAssert.isTrue(StringUtils.isNotBlank(activity.getDescription()), ResEnum.INVALID_PARAM.code, "[活动简介] 必须填写哦");
         MAssert.isTrue(activity.getStartTime() != null, ResEnum.INVALID_PARAM.code, "[开始时间] 必须填写哦");
         MAssert.isTrue(activity.getEndTime() != null, ResEnum.INVALID_PARAM.code, "[结束时间] 必须填写哦");
+        MAssert.isTrue(now.compareTo(activity.getEndTime()) <0, ResEnum.INVALID_PARAM.code, "[结束时间] 不能早于当前时间哦");
     }
 }

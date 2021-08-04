@@ -54,8 +54,8 @@ public class ActivityServiceImpl implements ActivityService {
         return activities.stream()
                 .map(activity -> {
                     List<SocialActivityParticipant> participants = activityParticipantsMap.get(activity.getId());
-                    if (CollectionUtils.isNotEmpty(participants) && participants.size() > 8) {
-                        participants = participants.subList(0, 8);
+                    if (CollectionUtils.isNotEmpty(participants) && participants.size() > 6) {
+                        participants = participants.subList(0, 6);
                     }
                     return ActivityBo.builder()
                             .activity(activity)
