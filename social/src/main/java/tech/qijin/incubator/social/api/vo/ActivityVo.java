@@ -37,6 +37,7 @@ public class ActivityVo {
     private String description;
     // 参与者
     private List<ParticipantVo> participants;
+    private Integer participantCount;
     // 是否是发起人
     @JSONField(name = "isMaster")
     private boolean isMaster;
@@ -63,6 +64,7 @@ public class ActivityVo {
                             .build())
                     .collect(Collectors.toList()));
         }
+        activityVo.setParticipantCount(activityBo.getParticipantCount());
         activityVo.setParticipant(activityBo.isParticipant());
         activityVo.setMaster(activityBo.isSponsor());
         if (CollectionUtils.isNotEmpty(activityBo.getActivityImages())) {

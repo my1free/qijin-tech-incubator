@@ -54,6 +54,7 @@ public class ActivityServiceImpl implements ActivityService {
         return activities.stream()
                 .map(activity -> {
                     List<SocialActivityParticipant> participants = activityParticipantsMap.get(activity.getId());
+                    int participantCount = CollectionUtils.size(participants);
                     if (CollectionUtils.isNotEmpty(participants) && participants.size() > 6) {
                         participants = participants.subList(0, 6);
                     }
@@ -63,6 +64,7 @@ public class ActivityServiceImpl implements ActivityService {
                             .isParticipant(CollectionUtils.isNotEmpty(participantUserIds) && participantUserIds.contains(UserUtil.getUserId()))
                             .activityImages(activityImagesMap.get(activity.getId()))
                             .participants(participants)
+                            .participantCount(participantCount)
                             .userProfileMap(cellUserProfileService.mapProfile(userIds))
                             .build();
                 })
